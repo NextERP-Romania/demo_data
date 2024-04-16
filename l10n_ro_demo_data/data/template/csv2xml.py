@@ -160,7 +160,7 @@ for line in lines:
         record[10],
     )
     if record[11]:
-        newline += """    <field name="seller_ids" eval="[(0, 0, {'name': ref('l10n_ro_demo_data.%s'), 'price': %s})]"/>
+        newline += """    <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.%s'), 'price': %s})]"/>
         """ % (
             record[11],
             record[12] if record[12] else 0,

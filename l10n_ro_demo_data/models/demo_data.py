@@ -314,7 +314,7 @@ class RomaniaTestData(models.Model):
                             0,
                             0,
                             {
-                                "name": supplier.id,
+                                "partner_id": supplier.id,
                                 "price": product.list_price
                                 * random.choice([0.7, 0.75, 0.8, 0.65, 0.6]),
                             },
@@ -450,13 +450,13 @@ class RomaniaTestData(models.Model):
                 picking = pickings[0]
                 picking.write(
                     {
-                        "notice": random.choice([True, False]),
+                        "l10n_ro_notice": random.choice([True, False]),
                         "scheduled_date": purchase.date_planned,
                         "date_done": purchase.date_planned,
                     }
                 )
                 for ml in picking.move_line_ids:
-                    ml.qty_done = ml.product_uom_qty
+                    ml.qty_done = ml.reserved_uom_qty
                 picking.button_validate()
                 if picking.state == "assigned":
                     picking._action_done()
@@ -480,7 +480,7 @@ class RomaniaTestData(models.Model):
                 picking = pickings[0]
                 picking.write(
                     {
-                        "notice": random.choice([True, False]),
+                        "l10n_ro_notice": random.choice([True, False]),
                         "create_date": sale.date_order,
                         "scheduled_date": sale.date_order,
                         "date_done": sale.date_order,
@@ -492,7 +492,7 @@ class RomaniaTestData(models.Model):
                     picking.action_assign()
                 if picking.state == "assigned":
                     for ml in picking.move_line_ids:
-                        ml.qty_done = ml.product_uom_qty
+                        ml.qty_done = ml.reserved_uom_qty
                     picking._action_done()
                 if picking.state == "done":
                     invoices = sale._create_invoices()
@@ -673,7 +673,7 @@ class RomaniaTestData(models.Model):
             sale.action_confirm()
         # self.products_add_supplier()
         # Run Scheduler to order Products
-        self.env["stock.warehouse.orderpoint"].flush()
+        self.env["stock.warehouse.orderpoint"].flush_model()
         self.env["stock.warehouse.orderpoint"]._get_orderpoint_action()
         self.env["stock.warehouse.orderpoint"].search([]).action_replenish_auto()
         # Confirm and Invoice Purchase Orders

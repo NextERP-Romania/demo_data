@@ -1,4 +1,4 @@
-id,name,categ_id,type,uom_id,uom_po_id,default_code,barcode,list_price,taxes_id,supplier_taxes_id,seller_ids/name/id,seller_ids/price
+id,name,categ_id,type,uom_id,uom_po_id,default_code,barcode,list_price,taxes_id,supplier_taxes_id,seller_ids/partner_id/id,seller_ids/price
 nexterp_demo_product_1,Agrafe Par Mari,Accesorii,product,uom.product_uom_unit,uom.product_uom_unit,ST_4215,30227125,2.50,TVA colectat 19% Bunuri,TVA deductibil 19% Bunuri,nexterp_demo_partner_177,1.63
 nexterp_demo_product_2,Agrafe Par Mici,Accesorii,product,uom.product_uom_unit,uom.product_uom_unit,ST_4057,20131548,2.50,TVA colectat 19% Bunuri,TVA deductibil 19% Bunuri,nexterp_demo_partner_168,1.88
 nexterp_demo_product_3,Ata Neagra + Colorata,Accesorii,product,uom.product_uom_unit,uom.product_uom_unit,ST_4424,2312505034427,2.00,TVA colectat 19% Bunuri,TVA deductibil 19% Bunuri,nexterp_demo_partner_61,1.4

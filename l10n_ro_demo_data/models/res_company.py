@@ -119,7 +119,7 @@ class ResCompany(models.Model):
                             ("company_id", "=", company.id),
                         ]
                     ),
-                    "invoice_no_signature_text": inv_text,
+                    "l10n_ro_no_signature_text": inv_text,
                 }
             )
 
