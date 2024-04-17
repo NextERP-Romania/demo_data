@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
     <record id="nexterp_demo_partner_1" model="res.partner">
-        <field name="name">A & D COMPUTERS 92 SRL</field>
+        <field name="name">AD COMPUTERS 92 SRL</field>
         <field name="is_company">1</field>
         <field name="vat">RO352406</field>
         <field name="street">Str. Cutezatorilor Nr. 2</field>
