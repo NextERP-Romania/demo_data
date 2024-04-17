@@ -67,14 +67,14 @@
         <field name="name">MICROSOFT IRELAND OPERATIONS LIMITED</field>
         <field name="is_company">1</field>
         <field name="vat">IE8256796U</field>
-        <field name="street">The Atrium Building Block B </field>
-        <field name="city">Carmenhall Road </field>
-        <field name="zip">Sandyford Industrial Esta</field>
-        <field name="state_id" ref="Belfast"/>
-        <field name="country_id" ref="DH6K"/>
-        <field name="l10n_ro_vat_subjected">base.state_ie_8</field>
-        <field name="l10n_ro_vat_on_payment">base.ie</field>
-        <field name="ref">0</field>
+        <field name="street">The Atrium Building Block B, Carmenhall Road ,Sandyford Industrial Esta</field>
+        <field name="city">Belfast</field>
+        <field name="zip">DH6K</field>
+        <field name="state_id" ref="base.state_ie_8"/>
+        <field name="country_id" ref="base.ie"/>
+        <field name="l10n_ro_vat_subjected">0</field>
+        <field name="l10n_ro_vat_on_payment">0</field>
+        <field name="ref">partener_intracomunitar_servicii</field>
     </record> 
     <record id="nexterp_demo_partner_7" model="res.partner">
         <field name="name">AMAZON EU SARL</field>
