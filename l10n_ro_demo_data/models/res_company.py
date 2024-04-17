@@ -22,7 +22,7 @@ class ResCompany(models.Model):
         afp_obj = self.env["account.fiscal.position"]
         for company in self:
             avans_prod = self.env.ref(
-                "l10n_ro_demo_data.nexterp_demo_product_1994", raise_if_not_found=False
+                "l10n_ro_demo_data.nexterp_demo_product_19", raise_if_not_found=False
             )
             if not avans_prod:
                 avans_prod = self.env["product.product"].search(

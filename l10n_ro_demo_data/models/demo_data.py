@@ -323,68 +323,47 @@ class RomaniaTestData(models.Model):
                 }
             )
 
-    def create_test_record_sale_order(self):
+    def create_test_record_sale_order(self, partner=False, product=False, fpos=False, discount=False, avans=False, notice=False):
         values = self._context.get("vals", {})
-        partner = self._get_random_customer()
-        prod_type = random.choice(["product", "service"])
-        product = self._get_random_product(prod_type)
+        if not partner:
+            partner = self._get_random_customer()
+        if not product:
+            prod_type = random.choice(["product", "service"])
+            product = self._get_random_product(prod_type)
         country = partner.country_id
-        fp = False
         sale_date = random.choice(days_last_month())
+        order_line = [(0, 0, {
+                "product_id": product.id,
+                "product_uom_qty": random.choice([1, 2, 3, 4, 5]),
+                "discount": discount if discount else 0,
+            },)
+        ]
+        if avans:
+            avans_product = self.get_record_ref(avans[0])
+            if avans_product:
+                order_line.append(
+                    (0, 0, {
+                        "product_id": avans_product.id,
+                        "product_uom_qty": 1,
+                        "price_unit": avans[1],
+                    },)
+                )
         vals = {
             "partner_id": partner.id,
             "partner_invoice_id": partner.id,
-            "fiscal_position_id": fp,
+            "fiscal_position_id": fpos,
             "partner_shipping_id": partner.id,
             "create_date": sale_date,
             "date_order": sale_date,
             "validity_date": sale_date,
             "commitment_date": sale_date,
             "effective_date": sale_date,
-            "order_line": [
-                (
-                    0,
-                    0,
-                    {
-                        "product_id": product.id,
-                        "product_uom_qty": random.choice([1, 2, 3, 4, 5]),
-                    },
-                )
-            ],
+            "order_line": order_line,
         }
         vals.update(values)
         sale = self.env["sale.order"].create(vals)
         sale.onchange_partner_id()
         sale.onchange_partner_shipping_id()
-        if not sale.fiscal_position_id and country:
-            eu_countries = self.env.ref("base.europe").country_ids
-            if country != self.env.ref("base.ro"):
-                if country in eu_countries:
-                    fp_name = random.choice(
-                        [
-                            "Regim Intra-Comunitar (TVA)",
-                            "Regim Intra-Comunitar Scutit",
-                            "Regim Scutite - cu drept de deducere",
-                            "Regim Scutite - fara drept de deducere",
-                            "Regim Intra-Comunitar Neimpozabile",
-                        ]
-                    )
-                else:
-                    if country in eu_countries:
-                        fp_name = "Regim Extra-Comunitar"
-            else:
-                fp_name = random.choice(
-                    [
-                        "Regim National (TVA)",
-                        "Regim National",
-                        "Regim Taxare Inversa",
-                        "Regim TVA la Incasare",
-                    ]
-                )
-            fp = self.env["account.fiscal.position"].search([("name", "=", fp_name)])
-            if fp:
-                sale.fiscal_position_id = fp[0]
-        # To check why the dates are not updated
         return sale
 
     @api.model
@@ -450,13 +429,13 @@ class RomaniaTestData(models.Model):
                 picking = pickings[0]
                 picking.write(
                     {
-                        "l10n_ro_notice": random.choice([True, False]),
+                        "notice": random.choice([True, False]),
                         "scheduled_date": purchase.date_planned,
                         "date_done": purchase.date_planned,
                     }
                 )
                 for ml in picking.move_line_ids:
-                    ml.qty_done = ml.reserved_uom_qty
+                    ml.qty_done = ml.product_uom_qty
                 picking.button_validate()
                 if picking.state == "assigned":
                     picking._action_done()
@@ -480,7 +459,7 @@ class RomaniaTestData(models.Model):
                 picking = pickings[0]
                 picking.write(
                     {
-                        "l10n_ro_notice": random.choice([True, False]),
+                        "notice": random.choice([True, False]),
                         "create_date": sale.date_order,
                         "scheduled_date": sale.date_order,
                         "date_done": sale.date_order,
@@ -492,7 +471,7 @@ class RomaniaTestData(models.Model):
                     picking.action_assign()
                 if picking.state == "assigned":
                     for ml in picking.move_line_ids:
-                        ml.qty_done = ml.reserved_uom_qty
+                        ml.qty_done = ml.product_uom_qty
                     picking._action_done()
                 if picking.state == "done":
                     invoices = sale._create_invoices()
@@ -519,166 +498,17 @@ class RomaniaTestData(models.Model):
                         partner, contact_type, country
                     )
 
+    def get_record_ref(self, ref):
+        return self.env.ref("l10n_ro_demo_data." + ref)
+
+    def get_test_sale_cases(self):
+        # partner=False, product=False, fpos=False, discount=False
+        pass
+
     @api.model
     def install_demo_data(self, company):
-        countries_eu = ["DE", "HU", "IT", "HR"]
-        countries_exp = ["TR", "RU", "TH"]
-        country_ro = "RO"
         acc_group = self.env.ref("account.group_account_user")
         users = self.env["res.users"].search([])
         for user in users:
             if acc_group and not user.has_group("account.group_account_user"):
                 user.write({"groups_id": [(4, acc_group.id)]})
-        partners = self.env["res.partner"].search([])
-        if len(partners) < 50:
-            self.create_partners(countries_eu, 100)
-            self.create_partners(countries_exp, 50)
-            self.create_partners(["RO"], 500)
-        # Create 25 categories
-        categories = self.env["product.category"].search([])
-        if len(categories) < 25:
-            language = "{}_{}".format(country_ro.lower(), country_ro.upper())
-            fake_data = faker.Faker(language)
-            fake_data.add_provider(faker_commerce.Provider)
-            for i in range(25):
-                categ_type = random.choice(["product", "consumable", "service"])
-                name = fake_data.ecommerce_category()
-                exist_categ = self.env["product.category"].search([("name", "=", name)])
-                if exist_categ:
-                    i -= 1
-                else:
-                    _logger.info("Create %s product category data." % i)
-                    self.create_test_record_product_category(name, categ_type)
-        # Create 200 products
-        products = self.env["product.product"].search([])
-        if len(products) < 200:
-            for i in range(200):
-                prod_type = random.choice(["product", "consumable"])
-                _logger.info("Create %s product product data." % i)
-                product = self.create_test_record_product(country_ro, prod_type)
-                cust_tax_9 = self.env["account.tax"].search(
-                    [
-                        ("name", "=", "TVA colectat 9% Bunuri"),
-                        ("company_id", "=", company.id),
-                    ]
-                )
-                cust_tax_5 = self.env["account.tax"].search(
-                    [
-                        ("name", "=", "TVA colectat 5% Bunuri"),
-                        ("company_id", "=", company.id),
-                    ]
-                )
-                cust_tax_0 = self.env["account.tax"].search(
-                    [
-                        ("name", "=", "TVA colectat 0% Bunuri"),
-                        ("company_id", "=", company.id),
-                    ]
-                )
-                supp_tax_9 = self.env["account.tax"].search(
-                    [
-                        ("name", "=", "TVA deductibil 9% Bunuri"),
-                        ("company_id", "=", company.id),
-                    ]
-                )
-                supp_tax_5 = self.env["account.tax"].search(
-                    [
-                        ("name", "=", "TVA deductibil 5% Bunuri"),
-                        ("company_id", "=", company.id),
-                    ]
-                )
-                supp_tax_0 = self.env["account.tax"].search(
-                    [
-                        ("name", "=", "TVA deductibil 0% Bunuri"),
-                        ("company_id", "=", company.id),
-                    ]
-                )
-                if i % 10 == 0:
-                    product.write(
-                        {"taxes_id": cust_tax_9, "supplier_taxes_id": supp_tax_9}
-                    )
-                if i % 15 == 0:
-                    product.write(
-                        {"taxes_id": cust_tax_5, "supplier_taxes_id": supp_tax_5}
-                    )
-                if i % 19 == 0:
-                    product.write(
-                        {"taxes_id": cust_tax_0, "supplier_taxes_id": supp_tax_0}
-                    )
-                if i % 18 == 0:
-                    d394_code = random.choice(self.env["anaf.product.code"].search([]))
-                    product.write({"anaf_code_id": d394_code.id})
-            # Create Services products
-            for i in range(100):
-                _logger.info("Create %s service product data." % i)
-                product = self.create_test_record_product(country_ro, "service")
-                product.type = "service"
-                cust_tax_9 = self.env["account.tax"].search(
-                    [
-                        ("name", "=", "TVA colectat 9% Servicii"),
-                        ("company_id", "=", company.id),
-                    ]
-                )
-                cust_tax_5 = self.env["account.tax"].search(
-                    [
-                        ("name", "=", "TVA colectat 5% Servicii"),
-                        ("company_id", "=", company.id),
-                    ]
-                )
-                cust_tax_0 = self.env["account.tax"].search(
-                    [
-                        ("name", "=", "TVA colectat 0% Servicii"),
-                        ("company_id", "=", company.id),
-                    ]
-                )
-                supp_tax_9 = self.env["account.tax"].search(
-                    [
-                        ("name", "=", "TVA deductibil 9% Servicii"),
-                        ("company_id", "=", company.id),
-                    ]
-                )
-                supp_tax_5 = self.env["account.tax"].search(
-                    [
-                        ("name", "=", "TVA deductibil 5% Servicii"),
-                        ("company_id", "=", company.id),
-                    ]
-                )
-                supp_tax_0 = self.env["account.tax"].search(
-                    [
-                        ("name", "=", "TVA deductibil 0% Servicii"),
-                        ("company_id", "=", company.id),
-                    ]
-                )
-                if i % 10 == 0:
-                    product.write(
-                        {"taxes_id": cust_tax_9, "supplier_taxes_id": supp_tax_9}
-                    )
-                if i % 15 == 0:
-                    product.write(
-                        {"taxes_id": cust_tax_5, "supplier_taxes_id": supp_tax_5}
-                    )
-                if i % 19 == 0:
-                    product.write(
-                        {"taxes_id": cust_tax_0, "supplier_taxes_id": supp_tax_0}
-                    )
-        # # Create 200 sale orders
-        sales = self.env["sale.order"].search([], order="name asc")
-        if len(sales) < 250:
-            for i in range(250):
-                _logger.info("Create %s sale order data." % i)
-                self.create_test_record_sale_order()
-        # Confirm 200 sale orders
-        sales = self.env["sale.order"].search([("state", "=", "draft")])
-        for sale in sales[:200]:
-            _logger.info("Confirm %s sale order." % sale.name)
-            sale.action_confirm()
-        # self.products_add_supplier()
-        # Run Scheduler to order Products
-        self.env["stock.warehouse.orderpoint"].flush_model()
-        self.env["stock.warehouse.orderpoint"]._get_orderpoint_action()
-        self.env["stock.warehouse.orderpoint"].search([]).action_replenish_auto()
-        # Confirm and Invoice Purchase Orders
-        purchases = self.env["purchase.order"].search([("state", "=", "draft")])
-        self.confirm_purchases(purchases)
-        # Confirm and Invoice Sale Orders
-        sales = self.env["sale.order"].search([("state", "=", "sale")])
-        self.confirm_sales(sales)

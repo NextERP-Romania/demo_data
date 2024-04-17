@@ -2,33 +2,8 @@ id,parent_id,name,property_cost_method,property_valuation,property_stock_account
 category_servicii,product.product_category_all,Servicii,standard,manual_periodic,,,,704000,628000
 category_materii_prime,product.product_category_all,Materii Prime,fifo,real_time,301000,301000,301000,702000,601000
 category_produse_finite,product.product_category_all,Produse Finite,fifo,real_time,345000,345000,345000,701500,711000
-category_accesorii,product.product_category_all,Accesorii,fifo,real_time,371000,371000,371000,707000,607000
+category_marfuri,product.product_category_all,Marfuri,fifo,real_time,371000,371000,371000,707000,607000
+category_marfuri_avg,product.product_category_all,Marfuri Average,average,real_time,371000,371000,371000,707000,607000
 category_ambalaje,product.product_category_all,Ambalaje,fifo,real_time,381000,381000,381000,707000,608000
-category_alimente,product.product_category_all,Alimente,fifo,real_time,371000,371000,371000,707000,607000
-category_altele,product.product_category_all,Altele,fifo,real_time,371000,371000,371000,707000,607000
-category_constructii,product.product_category_all,Construcții,fifo,real_time,371000,371000,371000,707000,607000
-category_cosmetice,product.product_category_all,Cosmetice,fifo,real_time,371000,371000,371000,707000,607000
-category_accesorii_motosape,category_accesorii,Accesorii Motosape,fifo,real_time,371000,371000,371000,707000,607000
-category_bucatarie,category_accesorii,Bucatarie,fifo,real_time,371000,371000,371000,707000,607000
-category_chips,category_alimente,Chips,fifo,real_time,371000,371000,371000,707000,607000
-category_congelate,category_alimente,Congelate,fifo,real_time,371000,371000,371000,707000,607000
-category_conserve,category_alimente,Conserve,fifo,real_time,371000,371000,371000,707000,607000
-category_dulciuri,category_alimente,Dulciuri,fifo,real_time,371000,371000,371000,707000,607000
-category_fainoase,category_alimente,Fainoase,fifo,real_time,371000,371000,371000,707000,607000
-category_inghetata,category_alimente,Inghetata,fifo,real_time,371000,371000,371000,707000,607000
-category_lactate,category_alimente,Lactate,fifo,real_time,371000,371000,371000,707000,607000
-category_legume/fructe,category_alimente,Legume/Fructe,fifo,real_time,371000,371000,371000,707000,607000
-category_paine,category_alimente,Paine,fifo,real_time,371000,371000,371000,707000,607000
-category_cartele,category_altele,Cartele,fifo,real_time,371000,371000,371000,707000,607000
-category_combustibil,category_altele,Combustibil,fifo,real_time,371000,371000,371000,707000,607000
-category_consumabile,category_altele,Consumabile,fifo,real_time,302800,302800,302800,702000,602800
-category_alcoolice,category_alimente,Alcoolice,fifo,real_time,371000,371000,371000,707000,607000
-category_apa,category_alimente,Apa,fifo,real_time,371000,371000,371000,707000,607000
-category_amenajari,category_constructii,Amenajari,fifo,real_time,371000,371000,371000,707000,607000
-category_foarfece_gradina,category_constructii,Foarfece Gradina,fifo,real_time,371000,371000,371000,707000,607000
-category_mortare_uscate,category_constructii,Mortare Uscate,fifo,real_time,371000,371000,371000,707000,607000
-category_placi_din_lemn,category_constructii,Placi Din Lemn,fifo,real_time,371000,371000,371000,707000,607000
-category_termoizolatii,category_constructii,Termoizolatii,fifo,real_time,371000,371000,371000,707000,607000
-category_tevi,category_constructii,Tevi,fifo,real_time,371000,371000,371000,707000,607000
-category_unelte_de_gradina,category_constructii,Unelte De Gradina,fifo,real_time,371000,371000,371000,707000,607000
-category_zidarie,category_constructii,Zidarie,fifo,real_time,371000,371000,371000,707000,607000
+category_combustibil,product.product_category_all,Combustibil,fifo,real_time,302200,302200,302200,707000,602200
+category_consumabile,product.product_category_all,Consumabile,fifo,real_time,302800,302800,302800,702000,602800

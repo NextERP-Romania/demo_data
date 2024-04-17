@@ -24,43 +24,36 @@ for line in lines:
         record[0],
         record[1],
     )
-    if record[2]:
-        newline += "\n"
-        newline += """        <field name="parent_id" ref="%s"/>""" % record[2]
     newline += (
         """
         <field name="is_company">%s</field>"""
-        % record[3]
+        % record[2]
     )
-    if record[4]:
+    if record[3]:
         newline += "\n"
-        newline += """        <field name="vat">%s</field>""" % record[4]
+        newline += """        <field name="vat">%s</field>""" % record[3]
     newline += """
         <field name="street">%s</field>
         <field name="city">%s</field>
         <field name="zip">%s</field>""" % (
+        record[4],
         record[5],
         record[6],
-        record[7],
     )
 
-    if record[2]:
+    if record[7]:
         newline += "\n"
-        newline += """        <field name="state_id" ref="%s"/>""" % record[8]
+        newline += """        <field name="state_id" ref="%s"/>""" % record[7]
     newline += """
         <field name="country_id" ref="%s"/>
-        <field name="email">%s</field>
-        <field name="phone">%s</field>
         <field name="l10n_ro_vat_subjected">%s</field>
-        <field name="customer_rank">%s</field>
-        <field name="supplier_rank">%s</field>
+        <field name="l10n_ro_vat_on_payment">%s</field>
+        <field name="ref">%s</field>
     </record> """ % (
+        record[8],
         record[9],
         record[10],
         record[11],
-        record[12],
-        record[13],
-        record[14],
     )
     new.write(newline + "\n")
 new.write("""</odoo>""" + "\n")
