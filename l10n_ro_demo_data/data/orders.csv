@@ -1,25 +1,31 @@
-type,ref,partner_id,fiscal_position_id,product_id,product_uom_qty,price_unit,discount,avans,notice,currency_id
-purchase,achizitie_platitor_tva,nexterp_demo_partner_2,,nexterp_demo_product_1,4,80,0,0,0,base.RON
-sale,vanzare_neplatitor_tva,nexterp_demo_partner_1,,nexterp_demo_product_1,4,110,10,0,0,base.RON
-purchase,achizitie_platitor_tva,nexterp_demo_partner_2,,nexterp_demo_product_1,4,80,0,0,1,base.RON
-purchase,achizitie_platitor_tva,nexterp_demo_partner_2,,nexterp_demo_product_1,4,80,0,0,0,base.RON
-sale,vanzare_avans_cost_diferit_neplatitor_tva,nexterp_demo_partner_1,,nexterp_demo_product_1,6,100,0,50,0,base.RON
-sale,vanzare_aviz_neplatitor_tva,nexterp_demo_partner_1,,nexterp_demo_product_1,2,100,0,0,1,base.RON
-purchase,achizitie_platitor_tva,nexterp_demo_partner_2,,nexterp_demo_product_5,4,80,0,0,0,base.RON
-sale,vanzare_platitor_tva,nexterp_demo_partner_1,,nexterp_demo_product_5,4,110,10,0,0,base.RON
-purchase,achizitie_platitor_tva,nexterp_demo_partner_2,,nexterp_demo_product_5,4,80,0,0,1,base.RON
-purchase,achizitie_platitor_tva,nexterp_demo_partner_2,,nexterp_demo_product_5,4,80,0,0,0,base.RON
-sale,vanzare_avans_cost_diferit_platitor_tva,nexterp_demo_partner_1,,nexterp_demo_product_5,6,100,0,50,0,base.RON
-sale,vanzare_aviz_platitor_tva,nexterp_demo_partner_1,,nexterp_demo_product_5,2,100,0,0,1,base.RON
-purchase,achizitie_intracom,nexterp_demo_partner_5,l10n_ro.1_fiscal_position_template_3,nexterp_demo_product_2,4,80,0,0,0,base.EUR
-sale,vanzare_platitor_tva,nexterp_demo_partner_1,,nexterp_demo_product_2,4,110,10,0,0,base.EUR
-purchase,achizitie_intracom,nexterp_demo_partner_5,l10n_ro.1_fiscal_position_template_3,nexterp_demo_product_2,4,80,0,0,1,base.EUR
-purchase,achizitie_intracom,nexterp_demo_partner_5,l10n_ro.1_fiscal_position_template_3,nexterp_demo_product_2,4,80,0,0,0,base.EUR
-sale,vanzare_avans_cost_diferit_platitor_tva,nexterp_demo_partner_1,,nexterp_demo_product_2,6,100,0,50,0,base.EUR
-sale,vanzare_aviz_platitor_tva,nexterp_demo_partner_1,,nexterp_demo_product_2,2,100,0,0,1,base.EUR
-purchase,achizitie_extracom,nexterp_demo_partner_7,l10n_ro.1_fiscal_position_template_7,nexterp_demo_product_3,4,80,0,0,0,base.USD
-sale,vanzare_platitor_tva,nexterp_demo_partner_1,,nexterp_demo_product_3,4,110,10,0,0,base.USD
-purchase,achizitie_extracom,nexterp_demo_partner_7,l10n_ro.1_fiscal_position_template_7,nexterp_demo_product_3,4,80,0,0,1,base.USD
-purchase,achizitie_extracom,nexterp_demo_partner_7,l10n_ro.1_fiscal_position_template_7,nexterp_demo_product_3,4,80,0,0,0,base.USD
-sale,vanzare_avans_cost_diferit_platitor_tva,nexterp_demo_partner_1,,nexterp_demo_product_3,6,100,0,50,0,base.USD
-sale,vanzare_aviz_platitor_tva,nexterp_demo_partner_1,,nexterp_demo_product_3,2,100,0,0,1,base.USD
+type,currency_id,partner_id,fiscal_position_id,product_id,step,qty,stock_qty,inv_qty,stock_qty2,inv_qty2,price,inv_price,inv_price2,discount,advance,notice,landed_cost,reception_in_progress,ref
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,5,5,0,0,100,100,0,0,0,0,0,0,receptie normala
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,5,5,0,0,100,110,0,0,0,0,0,0,receptie cu diferenta pret in plus
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,5,5,0,0,100,90,0,0,0,0,0,0,receptie cu diferenta pret in minus
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,5,2,-3,0,100,100,0,0,0,0,0,0,"receptie cu retur, factura pe diferenta"
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,2,5,5,5,-3,-3,100,100,100,0,0,0,0,0,"receptie cu factura, retur si factura storno"
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,2,2,0,0,100,100,0,0,0,0,0,0,receptie partiala
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,2,2,0,0,100,110,0,0,0,0,0,0,receptie partiala cu diferenta pret in plus
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,2,5,2,2,3,3,100,110,0,0,0,0,0,0,"receptie partiala cu diferenta pret in plus, receptie finala"
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,2,5,2,2,3,3,100,90,90,0,0,0,0,0,"receptie partiala cu diferenta pret in minus, receptie finala"
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,5,5,0,0,100,100,0,0,0,1,0,0,receptie cu aviz
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,5,5,0,0,100,110,0,0,0,1,0,0,"receptie cu aviz, diferenta pret in plus"
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,5,5,0,0,100,90,0,0,0,1,0,0,"receptie cu aviz, diferenta pret in minus"
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,5,2,-3,0,100,100,0,0,0,1,0,0,"receptie cu aviz, return tot cu aviz"
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,2,5,2,2,3,3,100,110,110,0,0,1,0,0,"receptie cu aviz partiala cu diferenta pret in plus, receptie finala"
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,2,5,2,2,3,3,100,90,90,0,0,1,0,0,"receptie cu aviz partiala cu diferenta pret in minus, receptie finala"
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,5,5,0,0,100,100,0,0,0,0,100,0,receptie cu landed cost pozitiv (transport)
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,5,5,0,0,100,100,0,0,0,1,-100,0,receptie cu aviz cu landed cost negativ (discount financiar)
+purchase,base.RON,nexterp_demo_partner_2,,nexterp_demo_product_1,1,5,5,5,0,0,100,100,0,0,0,0,0,1,receptie in curs
+sale,base.RON,nexterp_demo_partner_1,,nexterp_demo_product_1,1,4,4,4,0,0,110,110,0,10,0,0,0,0,
+sale,base.RON,nexterp_demo_partner_1,,nexterp_demo_product_1,1,6,6,6,0,0,100,100,0,0,50,0,0,0,
+sale,base.RON,nexterp_demo_partner_1,,nexterp_demo_product_1,1,2,2,2,0,0,100,100,0,0,0,1,0,0,
+sale,base.RON,nexterp_demo_partner_1,,nexterp_demo_product_5,1,4,4,4,0,0,110,110,0,10,0,0,0,0,
+sale,base.RON,nexterp_demo_partner_1,,nexterp_demo_product_5,1,6,6,6,0,0,100,100,0,0,50,0,0,0,
+sale,base.RON,nexterp_demo_partner_1,,nexterp_demo_product_5,1,2,2,2,0,0,100,100,0,0,0,1,0,0,
+sale,base.EUR,nexterp_demo_partner_1,,nexterp_demo_product_2,1,4,4,4,0,0,110,110,0,10,0,0,0,0,
+sale,base.EUR,nexterp_demo_partner_1,,nexterp_demo_product_2,1,6,6,6,0,0,100,100,0,0,50,0,0,0,
+sale,base.EUR,nexterp_demo_partner_1,,nexterp_demo_product_2,1,2,2,2,0,0,100,100,0,0,0,1,0,0,
+sale,base.USD,nexterp_demo_partner_1,,nexterp_demo_product_3,1,4,4,4,0,0,110,110,0,10,0,0,0,0,
+sale,base.USD,nexterp_demo_partner_1,,nexterp_demo_product_3,1,6,6,6,0,0,100,100,0,0,50,0,0,0,
+sale,base.USD,nexterp_demo_partner_1,,nexterp_demo_product_3,1,2,2,2,0,0,100,100,0,0,0,1,0,0,

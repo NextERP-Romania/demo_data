@@ -26,9 +26,8 @@ class ResCompany(models.Model):
         acc_obj = self.env["account.account"]
         afp_obj = self.env["account.fiscal.position"]
         for company in self:
-            self.env['ir.config_parameter'].set_param('sale.automatic_invoice', "delivery")
             avans_products = self.env["product.product"].search([]).filtered(
-                lambda p: "Avans" in p._name
+                lambda p: "Avans" in p.name
             )
             avans_products.write(
                 {
@@ -96,22 +95,29 @@ class ResCompany(models.Model):
                     "l10n_ro_no_signature_text": inv_text,
                 }
             )
-
-        rcs_model = self.env["res.config.settings"]
-        acs_ids = rcs_model.search([("company_id", "=", company.id)])
-        values = {
-            "group_multi_currency": True,
-            "group_show_sale_receipts": True,
-            "group_show_purchase_receipts": True,
-            "group_sale_delivery_address": True,
-            "group_proforma_sales": True,
-            "group_stock_multi_locations": True,
-            "module_sale_margin": True,
-            "extract_single_line_per_tax": False,
-            "module_account_invoice_extract": False,
-            "module_snailmail_account": False,
-            "module_partner_autocomplete": False,
-            "module_stock_sms": False,
-        }
-        if acs_ids:
-            acs_ids.write(values)
+        config = self.env['res.config.settings'].create({})
+        config.write(
+            {
+                
+                "company_id": self.env.company.id,
+                "default_invoice_policy": "delivery",
+                "group_multi_currency": True,
+                "group_show_sale_receipts": True,
+                "group_show_purchase_receipts": True,
+                "group_sale_delivery_address": True,
+                "group_uom": True,
+                "group_discount_per_so_line": True,
+                "group_proforma_sales": True,
+                "group_stock_production_lot": True,
+                "group_stock_multi_locations": True,
+                "extract_single_line_per_tax": False,
+                # "module_sale_margin": True,
+                # "module_account_invoice_extract": False,
+                # "module_snailmail_account": False,
+                # "module_partner_autocomplete": False,
+                # "module_stock_sms": False,
+                # "module_delivery": False,
+            }
+        )
+        config.flush_recordset()
+        config.execute()

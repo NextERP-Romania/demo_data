@@ -353,3 +353,10 @@ class RomaniaTestDataMixin(models.Model):
             if key in refs:
                 values[key] = self.get_record_ref(values[key])
         return dict(values)
+
+    def clean_values(self, values):
+        clean_values = ["qty", "inv_qty", "price", "discount", "advance", "notice", "price_diff", "landed_cost", "reception_in_progress"]
+        for key in clean_values:
+            if key in values:
+                values.pop(key)
+        return values
