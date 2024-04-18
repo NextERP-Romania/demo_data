@@ -4,21 +4,14 @@
 
 import logging
 import random
+import os
+import csv
+import codecs
 from datetime import date, timedelta
 
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, models
-from odoo.exceptions import ValidationError
-
-_logger = logging.getLogger(__name__)
-
-try:
-    import faker
-    import faker_commerce
-except (ImportError, IOError) as err:
-    _logger.debug(err)
-
 
 def days_last_month():
     last_month = date.today() + relativedelta(
@@ -35,407 +28,141 @@ def days_last_month():
     ]
 
 
-def random_numbers(length):
-    return "".join(["%s" % random.randint(0, 9) for num in range(0, length)])
-
-
-EMAIL_DOMAIN = "@odooerpromania.ro"
-PASSWORD = "odooerpromania"
-
-
 class RomaniaTestData(models.Model):
     _name = "nexterp.demodata"
-    _description = "Configure company and create demo data"
-
-    def _get_random_customer(self):
-        return random.choice(
-            self.env["res.partner"].search(
-                [("customer_rank", ">", 0), ("is_company", "=", True)]
-            )
-        )
-
-    def _get_random_supplier(self):
-        return random.choice(
-            self.env["res.partner"].search(
-                [("supplier_rank", ">", 0), ("is_company", "=", True)]
-            )
-        )
-
-    def _get_random_product_category(self, exp_acc="607000"):
-        return random.choice(
-            self.env["product.category"].search(
-                [("property_account_expense_categ_id.code", "=", exp_acc)]
-            )
-        )
-
-    def _get_random_product(self, prod_type="product"):
-        return random.choice(
-            self.env["product.product"].search([("type", "=", prod_type)])
-        )
-
-    def _pay_invoice(self, invoice):
-        journal = self.env["account.journal"].search(
-            [("type", "=", "bank"), ("at_least_one_inbound", "=", True)], limit=1
-        )
-        values = (
-            self.env["account.payment"]
-            .with_context(default_invoice_ids=[(6, 0, [invoice.id])])
-            .default_get(["invoice_ids"])
-        )
-        values.update(
-            {
-                "payment_method_id": self.env.ref(
-                    "account.account_payment_method_manual_in"
-                ).id,
-                "journal_id": journal.id,
-            }
-        )
-        payment = self.env["account.payment"].create(values)
-        payment.action_validate_invoice_payment()
+    _inherit = "nexterp.demodata.mixin"
+    _description = "Create demo data for sale and purchase"
 
     @api.model
-    def create_test_record(self, model, values):
-        """Create new odoo record."""
-        if not model:
-            return False
-        model_obj = self.env[model]
-        if not values:
-            values = model_obj.default_get(list(model_obj._fields.keys()))
-        return model_obj.create(values)
-
-    @api.model
-    def create_test_record_res_partner(self, country_code):
-        """Create new partner."""
-        values = self._context.get("values", {})
-        language = "{}_{}".format(country_code.lower(), country_code.upper())
-        fake_data = faker.Faker(language)
-        state = False
-        country = self.env["res.country"].search([("code", "=", country_code)])
-        if country:
-            country = country[0].id
-            states = self.env["res.country.state"].search(
-                [("country_id", "=", country)]
-            )
-            if states:
-                state = random.choice(states).id
-        l10n_ro_vat_subjected = random.choice([True, False])
-        vals = {
-            "name": fake_data.company(),
-            "email": fake_data.email(),
-            "is_company": True,
-            "street": fake_data.street_address(),
-            "zip": fake_data.postcode(),
-            "city": fake_data.city(),
-            "state_id": state,
-            "country_id": country,
-            "phone": fake_data.phone_number(),
-            "l10n_ro_l10n_ro_vat_subjected": l10n_ro_vat_subjected,
-            "customer_rank": int(fake_data.boolean()),
-            "supplier_rank": int(fake_data.boolean()),
-        }
-        vals.update(values)
-
-        partner = self.create_test_record("res.partner", vals)
-        vat_generated = False
-        while not vat_generated:
-            vat_number = False
-            if hasattr(fake_data, "vat_id"):
-                vat_number = fake_data.vat_id()
-            elif hasattr(fake_data, "businesses_inn"):
-                vat_number = fake_data.businesses_inn()
-            elif hasattr(fake_data, "ssn"):
-                vat_number = fake_data.ssn()
-            if vat_number:
-                try:
-                    partner.write({"vat": vat_number})
-                    vat_generated = True
-                except ValidationError:
-                    pass
-
-        return partner
-
-    @api.model
-    def partners_generate_vat(self):
-        partners = self.env["res.partner"].search([("is_company", "=", True)])
-        for partner in partners:
-            country_code = partner.country_id.code
-            if country_code:
-                language = "{}_{}".format(country_code.lower(), country_code.upper())
-                fake_data = faker.Faker(language)
-            else:
-                fake_data = faker.Faker()
-            vat_generated = False
-            while not vat_generated:
-                vat_number = fake_data.vat_id()
-                try:
-                    partner.write({"vat": vat_number})
-                    vat_generated = True
-                except ValidationError:
-                    pass
-
-    @api.model
-    def create_test_record_partner_contact(self, partner, contact_type, country_code):
-        """Create new partner contact.
-        :param: int partner_id: id for partner to this address
-        """
-        values = self._context.get("values", {})
-        language = "{}_{}".format(country_code.lower(), country_code.upper())
-        fake_data = faker.Faker(language)
-        state = False
-        country = self.env["res.country"].search([("code", "=", country_code)])
-        if country:
-            country = country[0].id
-            states = self.env["res.country.state"].search(
-                [("country_id", "=", country)]
-            )
-            if states:
-                state = random.choice(states).id
-        vals = {
-            "name": fake_data.name(),
-            "email": fake_data.email(),
-            "parent_id": partner.id if partner else False,
-            "country_id": self.env.ref("base.ro").id,
-            "zip": fake_data.postcode(),
-            "street": fake_data.street_address(),
-            "city": fake_data.city(),
-            "state_id": state,
-            "type": contact_type,
-        }
-        vals.update(values)
-
-        return self.create_test_record("res.partner", vals)
-
-    @api.model
-    def create_test_record_res_users(self, country_code):
-        """Create new user."""
-        values = self._context.get("values", {})
-        language = "{}_{}".format(country_code.lower(), country_code.upper())
-        fake_data = faker.Faker(language)
-        if not values.get("name"):
-            values["name"] = fake_data.name()
-        if not values.get("email"):
-            values["email"] = fake_data.email()
-
-        if not values.get("login") and values.get("email"):
-            values["login"] = values["email"]
-
-        groups_id = []
-        if values.get("groups_id", ""):
-            for group_ref in values.get("groups_id", "").split(","):
-                group = self.env.ref(group_ref)
-                if group:
-                    groups_id.append(group.id)
-        if groups_id:
-            values["groups_id"] = [(6, 0, groups_id)]
-        return self.create_test_record("res.users", values)
-
-    def create_test_record_product_category(self, name, prod_type="product"):
-        acc_obj = self.env["account.account"]
-        values = self._context.get("values", {})
-        parent = self._get_random_product_category()
-        if prod_type == "product":
-            stock_acc = acc_obj.search([("code", "=", "371000")])
-            expense_acc = acc_obj.search([("code", "=", "607000")])
-            income_acc = acc_obj.search([("code", "=", "707000")])
-        elif prod_type == "consumable":
-            stock_acc = acc_obj.search([("code", "=", "302800")])
-            expense_acc = acc_obj.search([("code", "=", "602800")])
-            income_acc = acc_obj.search([("code", "=", "702000")])
-        elif prod_type == "service":
-            stock_acc = acc_obj.search([("code", "=", "371000")])
-            expense_acc = acc_obj.search([("code", "=", "628000")])
-            income_acc = acc_obj.search([("code", "=", "704000")])
-        vals = {
-            "name": name,
-            "parent_id": parent.id,
-            "property_cost_method": "fifo" if prod_type != "service" else "standard",
-            "property_valuation": "real_time"
-            if prod_type != "service"
-            else "manual_periodic",
-            "property_stock_valuation_account_id": stock_acc.id,
-            "property_stock_account_input_categ_id": stock_acc.id,
-            "property_stock_account_output_categ_id": stock_acc.id,
-            "property_account_income_categ_id": income_acc.id,
-            "property_account_expense_categ_id": expense_acc.id,
-        }
-        vals.update(values)
-        return self.env["product.category"].create(vals)
-
-    def create_test_record_product(self, country_code, prod_type="product"):
-        values = self._context.get("values", {})
-        language = "{}_{}".format(country_code.lower(), country_code.upper())
-        fake_data = faker.Faker(language)
-        fake_data.add_provider(faker_commerce.Provider)
-        name = fake_data.ecommerce_name()
-        exp_acc = "607000"
-        if prod_type == "consumable":
-            exp_acc = "602800"
-        elif prod_type == "service":
-            exp_acc = "628000"
-        if prod_type == "consumable":
-            prod_type = "product"
-        sale_serv_tax = self.env["account.tax"].search(
-            [
-                ("name", "=", "TVA colectat 19% Servicii"),
-                ("company_id", "=", self.env.company.id),
-            ]
+    def install_demo_data(self, company):
+        acc_group = self.env.ref("account.group_account_user")
+        users = self.env["res.users"].search([])
+        for user in users:
+            if acc_group and not user.has_group("account.group_account_user"):
+                user.write({"groups_id": [(4, acc_group.id)]})
+        data_dir = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data/"
         )
-        purch_serv_tax = self.env["account.tax"].search(
-            [
-                ("name", "=", "TVA deductibil 19% Servicii"),
-                ("company_id", "=", self.env.company.id),
-            ]
-        )
+        f = open(os.path.join(data_dir, "orders.csv"), "rb")
+        orders = csv.DictReader(codecs.iterdecode(f, "utf-8"))
+        for order in orders:
+            if order.get("type") == "sale":
+                self.create_sale_order(order)
+            elif order.get("type") == "purchase":
+                self.create_purchase(order)
 
-        product_category = self._get_random_product_category(exp_acc)
-        list_price = fake_data.pyfloat(right_digits=2, min_value=100, max_value=25000)
-        vals = {
-            "name": name,
-            "type": prod_type,
-            "categ_id": product_category.id,
-            "list_price": list_price,
-        }
-        if prod_type == "service":
-            if sale_serv_tax:
-                vals["taxes_id"] = sale_serv_tax
-            if purch_serv_tax:
-                vals["supplier_taxes_id"] = purch_serv_tax
-        vals.update(values)
-        return self.env["product.product"].create(vals)
-
-    def products_add_supplier(self):
-        products = self.env["product.product"].search([("type", "=", "product")])
-        for product in products:
-            supplier = self._get_random_supplier()
-            product.write(
-                {
-                    "seller_ids": [
-                        (
-                            0,
-                            0,
-                            {
-                                "partner_id": supplier.id,
-                                "price": product.list_price
-                                * random.choice([0.7, 0.75, 0.8, 0.65, 0.6]),
-                            },
-                        )
-                    ],
-                }
-            )
-
-    def create_test_record_sale_order(self, partner=False, product=False, fpos=False, discount=False, avans=False, notice=False):
-        values = self._context.get("vals", {})
-        if not partner:
-            partner = self._get_random_customer()
-        if not product:
+    def create_sale_order(self, values):
+        if "type" in values:
+            values.pop("type")
+        if self._context.get("vals", {}):
+            values.update(self._context.get("vals", {}))
+        values = self.get_references_from_values(values)
+        if not values.get("partner_id"):
+            values["partner_id"] = self._get_random_customer()
+        if not values.get("product_id"):
             prod_type = random.choice(["product", "service"])
-            product = self._get_random_product(prod_type)
+            values["product_id"] = self._get_random_product(prod_type)
+        partner = values["partner_id"]
         country = partner.country_id
         sale_date = random.choice(days_last_month())
         order_line = [(0, 0, {
-                "product_id": product.id,
-                "product_uom_qty": random.choice([1, 2, 3, 4, 5]),
-                "discount": discount if discount else 0,
+                "product_id": values["product_id"].id,
+                "product_uom_qty": values.get("product_uom_qty", 1),
+                "price_unit": values.get("price_unit", 100),
+                "discount": values.get("discount", 0),
             },)
         ]
-        if avans:
-            avans_product = self.get_record_ref(avans[0])
-            if avans_product:
-                order_line.append(
-                    (0, 0, {
-                        "product_id": avans_product.id,
-                        "product_uom_qty": 1,
-                        "price_unit": avans[1],
-                    },)
-                )
+        fpos = False
+        if values.get("fiscal_position_id", False):
+            fpos = values["fiscal_position_id"].id
         vals = {
-            "partner_id": partner.id,
-            "partner_invoice_id": partner.id,
+            "partner_id": values["partner_id"].id,
+            "partner_invoice_id": values["partner_id"].id,
             "fiscal_position_id": fpos,
-            "partner_shipping_id": partner.id,
+            "partner_shipping_id": values["partner_id"].id,
+            "currency_id": values.get("currency_id", self.env.company.currency_id).id,
             "create_date": sale_date,
             "date_order": sale_date,
             "validity_date": sale_date,
             "commitment_date": sale_date,
             "effective_date": sale_date,
             "order_line": order_line,
+            "client_order_ref": values.get("ref", False),
         }
-        vals.update(values)
+        notice = values.pop("notice", False)
+        avans = values.pop("avans", False)
         sale = self.env["sale.order"].create(vals)
-        sale.onchange_partner_id()
-        sale.onchange_partner_shipping_id()
+        sale.action_confirm()
+        if avans:
+            product_id = self.env['ir.config_parameter'].sudo().get_param('sale.default_deposit_product_id')
+            product_id = self.env['product.product'].browse(int(product_id)).exists()
+            if product_id:
+                adv_wiz = self.env['sale.advance.payment.inv'].with_context(active_ids=[sale.id]).create({
+                    'advance_payment_method': 'percentage',
+                    'amount': 50.0,
+                    'product_id': product_id.id,
+                })
+                act = adv_wiz.with_context(open_invoices=True).create_invoices()
+                invoice = self.env['account.move'].browse(act['res_id'])
+                invoice.action_post()
+        self.deliver_and_invoice_sales(sale, notice=notice, avans=avans)
         return sale
 
+    def create_purchase(self, values):
+        if self._context.get("vals", {}):
+            values.update(self._context.get("vals", {}))
+        values = self.get_references_from_values(values)
+        if not values.get("partner_id"):
+            values["partner_id"] = self._get_random_supplier()
+        if not values.get("product_id"):
+            prod_type = random.choice(["product", "service"])
+            values["product_id"] = self._get_random_product(prod_type)
+        partner = values["partner_id"]
+        country = partner.country_id
+        purchase_date = random.choice(days_last_month())
+        order_line = [(0, 0, {
+                "product_id": values["product_id"].id,
+                "product_qty": values.get("product_uom_qty", 1),
+                "price_unit": values.get("price_unit", 80)
+            },)
+        ]
+        fpos = False
+        if values.get("fiscal_position_id", False):
+            fpos = values["fiscal_position_id"].id
+        vals = {
+            "partner_id": values["partner_id"].id,
+            "currency_id": values.get("currency_id", self.env.company.currency_id).id,
+            "fiscal_position_id": fpos,
+            "create_date": purchase_date,
+            "date_order": purchase_date,
+            "date_planned": purchase_date,
+            "date_approve": purchase_date,
+            "effective_date": purchase_date,
+            "order_line": order_line,
+            "origin": values.get("ref", False)
+        }
+        notice = values.pop("notice")
+        purchase = self.env["purchase.order"].create(vals)
+        purchase.onchange_partner_id()
+        purchase.button_confirm()
+        self.receive_and_invoice_purchases(purchase, notice=notice)
+        return purchase
+
     @api.model
-    def confirm_purchases(self, purchases):
+    def receive_and_invoice_purchases(self, purchases, notice=False):
         for purchase in purchases:
-            purdate = random.choice(days_last_month())
-            purchase.write(
-                {
-                    "create_date": purdate,
-                    "date_approve": purdate,
-                    "date_planned": purdate,
-                    "effective_date": purdate,
-                }
-            )
-            purchase.onchange_partner_id()
-            (
-                country_code,
-                identifier_type,
-                vat_number,
-            ) = purchase.partner_id.commercial_partner_id._parse_anaf_vat_info()
-            sale = purchase.order_line.sale_order_id
-            if identifier_type == "1":
-                fp_name = random.choice(
-                    [
-                        "Regim National (TVA)",
-                        "Regim National",
-                        "Regim Taxare Inversa",
-                        "Regim TVA la Incasare",
-                    ]
-                )
-                if sale.fiscal_position_id.name in [
-                    "Regim Taxare Inversa",
-                    "Regim TVA la Incasare",
-                ]:
-                    fp_name = sale.fiscal_position_id.name
-            elif identifier_type == "2":
-                fp_name = "Regim National"
-            elif identifier_type == "3":
-                fp_name = random.choice(
-                    [
-                        "Regim Intra-Comunitar (TVA)",
-                        "Regim Intra-Comunitar Scutit",
-                        "Regim Scutite - cu drept de deducere",
-                        "Regim Scutite - fara drept de deducere",
-                        "Regim Intra-Comunitar Neimpozabile",
-                    ]
-                )
-            else:
-                fp_name = "Regim Extra-Comunitar"
-            fp = self.env["account.fiscal.position"].search([("name", "=", fp_name)])
-            if fp:
-                purchase.fiscal_position_id = fp[0]
-            fiz_person = (
-                purchase.partner_id.country_id.id == self.env.ref("base.ro").id
-                and not purchase.partner_id.l10n_ro_vat_subjected
-            )
-            if fp_name == "Regim National" or fiz_person:
-                for line in purchase.order_line:
-                    line.taxes_id = [(6, 0, [])]
-            purchase.button_confirm()
             pickings = purchase.picking_ids
             if pickings:
                 picking = pickings[0]
                 picking.write(
                     {
-                        "notice": random.choice([True, False]),
+                        "l10n_ro_notice": notice or False,
                         "scheduled_date": purchase.date_planned,
                         "date_done": purchase.date_planned,
                     }
                 )
                 for ml in picking.move_line_ids:
-                    ml.qty_done = ml.product_uom_qty
+                    ml.qty_done = ml.reserved_qty
                 picking.button_validate()
                 if picking.state == "assigned":
                     picking._action_done()
@@ -452,14 +179,14 @@ class RomaniaTestData(models.Model):
                     invoice.action_post()
 
     @api.model
-    def confirm_sales(self, sales):
+    def deliver_and_invoice_sales(self, sales, notice=False, avans=False):
         for sale in sales:
             pickings = sale.picking_ids
             if pickings:
                 picking = pickings[0]
                 picking.write(
                     {
-                        "notice": random.choice([True, False]),
+                        "l10n_ro_notice": notice,
                         "create_date": sale.date_order,
                         "scheduled_date": sale.date_order,
                         "date_done": sale.date_order,
@@ -471,10 +198,10 @@ class RomaniaTestData(models.Model):
                     picking.action_assign()
                 if picking.state == "assigned":
                     for ml in picking.move_line_ids:
-                        ml.qty_done = ml.product_uom_qty
+                        ml.qty_done = ml.reserved_qty
                     picking._action_done()
                 if picking.state == "done":
-                    invoices = sale._create_invoices()
+                    invoices = sale._create_invoices(final=avans)
                     invoices.write(
                         {
                             "invoice_date": sale.date_order,
@@ -482,33 +209,3 @@ class RomaniaTestData(models.Model):
                         }
                     )
                     invoices.action_post()
-
-    @api.model
-    def create_partners(self, countries, number):
-        for i in range(number):
-            country = random.choice(countries)
-            partner = self.create_test_record_res_partner(country)
-            if i % 10 == 0:
-                for c in range(3):
-                    _logger.info("Create {} contact for {}".format(c, partner.name))
-                    contact_type = random.choice(
-                        ["contact", "invoice", "delivery", "other", "private"]
-                    )
-                    self.create_test_record_partner_contact(
-                        partner, contact_type, country
-                    )
-
-    def get_record_ref(self, ref):
-        return self.env.ref("l10n_ro_demo_data." + ref)
-
-    def get_test_sale_cases(self):
-        # partner=False, product=False, fpos=False, discount=False
-        pass
-
-    @api.model
-    def install_demo_data(self, company):
-        acc_group = self.env.ref("account.group_account_user")
-        users = self.env["res.users"].search([])
-        for user in users:
-            if acc_group and not user.has_group("account.group_account_user"):
-                user.write({"groups_id": [(4, acc_group.id)]})

@@ -162,37 +162,3 @@ for line in lines:
     new.write(newline + "\n")
 new.write("""</odoo>""" + "\n")
 f.close()
-
-# Generate sale order XML
-f = open(template_dir + "/sale.order.csv", "r")
-new = open(xml_dir + "sale_order.xml", "w")
-
-new.write(
-    """<?xml version="1.0" encoding="utf-8"?>
-<odoo noupdate="1">"""
-    + "\n"
-)
-
-lines = f.readlines()[1:]
-for line in lines:
-    line = line.replace('"', "")
-    line = line.replace("\n", "")
-    record = line.split(",")
-    newline = """    <record id="%s"  model="sale.order">
-        <field name="name">%s</field>
-        <field name="partner_id" ref="%s"/>
-        <field name="fiscal_position_id" ref="%s"/>
-        <field name="order_line"
-        eval="[(0, 0, {'product_id': ref('%s'), 'product_uom_qty': %s, 'price_unit': %s})]"/>
-    </record>""" % (
-        record[0],
-        record[1],
-        record[2],
-        record[3],
-        record[4],
-        record[5],
-        record[6],
-    )
-    new.write(newline + "\n")
-new.write("""</odoo>""" + "\n")
-f.close()

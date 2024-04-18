@@ -1,8 +1,8 @@
 id,name,is_company,vat,street,city,zip,state_id,country_id,l10n_ro_vat_subjected,l10n_ro_vat_on_payment,ref
-nexterp_demo_partner_1,A & D COMPUTERS 92 SRL,1,RO352406,Str. Cutezatorilor Nr. 2,Sector 3,31605,base.RO_B,base.ro,0,0,partener_neplatitor_tva
+nexterp_demo_partner_1,AD COMPUTERS 92 SRL,1,RO352406,Str. Cutezatorilor Nr. 2,Sector 3,31605,base.RO_B,base.ro,0,0,partener_neplatitor_tva
 nexterp_demo_partner_2,24 EVONESS SRL,1,RO25728965,Str. Bega Nr. 6,Cluj-Napoca,400601,base.RO_CJ,base.ro,1,0,partener_platitor_tva
 nexterp_demo_partner_3,A PLUS COMPANY SRL,1,RO15017523,Șos. Tudor Vladimirescu Nr. 309,Sat Domnești Com Domnești,77090,base.RO_IF,base.ro,1,1,partener_tva_la_incasare
 nexterp_demo_partner_4,ALBU IOAN DANIEL,0,,Test Partener,Sector 2,33563,base.RO_B,base.ro,0,0,partener_persoana_fizica
 nexterp_demo_partner_5,2K TANK GMBH,1,ATU68631108,Wirtschaftsweg 3,Angath,At-6321,,base.at,0,0,partener_intracomunitar
-nexterp_demo_partner_6,MICROSOFT IRELAND OPERATIONS LIMITED,1,IE8256796U,"The Atrium Building Block B ,Carmenhall Road ,Sandyford Industrial Esta",Belfast,DH6K,base.state_ie_8,base.ie,0,0,partener_intracomunitar_servicii
+nexterp_demo_partner_6,MICROSOFT IRELAND OPERATIONS LIMITED,1,IE8256796U,The Atrium Building Block B,Belfast,DH6K,base.state_ie_8,base.ie,0,0,partener_intracomunitar_servicii
 nexterp_demo_partner_7,AMAZON EU SARL,1,GB727255821,Tax Team60 Holborn Viaduct,London,Ec1A 2Fd,base.state_uk117,base.uk,0,0,partener_extracomunitar

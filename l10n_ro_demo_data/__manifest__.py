@@ -56,7 +56,6 @@
         "data/res_partner.xml",
         "data/product_category.xml",
         "data/product_product.xml",
-        "data/sale_order.xml",
     ],
     "installable": True,
     "auto_install": False,

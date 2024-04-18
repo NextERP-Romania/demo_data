@@ -67,7 +67,7 @@
         <field name="name">MICROSOFT IRELAND OPERATIONS LIMITED</field>
         <field name="is_company">1</field>
         <field name="vat">IE8256796U</field>
-        <field name="street">The Atrium Building Block B, Carmenhall Road ,Sandyford Industrial Esta</field>
+        <field name="street">The Atrium Building Block B</field>
         <field name="city">Belfast</field>
         <field name="zip">DH6K</field>
         <field name="state_id" ref="base.state_ie_8"/>

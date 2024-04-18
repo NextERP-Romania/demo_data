@@ -11,7 +11,7 @@
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_177'), 'price': 3.75})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_2"  model="product.product">
         <field name="name">Marfa Fifo 9% tva</field>
@@ -24,7 +24,7 @@
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 9% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 9% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_168'), 'price': 3.75})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_3"  model="product.product">
         <field name="name">Marfa Fifo 5% tva</field>
@@ -37,7 +37,7 @@
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 5% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 5% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_61'), 'price': 1.5})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 1.5})]"/>
         </record> 
     <record id="nexterp_demo_product_4"  model="product.product">
         <field name="name">Marfa Fifo 0% tva</field>
@@ -50,7 +50,7 @@
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 0% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 0% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_461'), 'price': 0.75})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 0.75})]"/>
         </record> 
     <record id="nexterp_demo_product_5"  model="product.product">
         <field name="name">Marfa Average 19% tva</field>
@@ -63,7 +63,7 @@
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_177'), 'price': 3.75})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_3'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_6"  model="product.product">
         <field name="name">Marfa Average 9% tva</field>
@@ -76,7 +76,7 @@
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 9% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 9% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_168'), 'price': 3.75})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_3'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_7"  model="product.product">
         <field name="name">Marfa Average 5% tva</field>
@@ -89,7 +89,7 @@
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 5% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 5% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_61'), 'price': 1.5})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_3'), 'price': 1.5})]"/>
         </record> 
     <record id="nexterp_demo_product_8"  model="product.product">
         <field name="name">Marfa Average 0% tva</field>
@@ -102,7 +102,7 @@
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 0% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 0% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_461'), 'price': 0.75})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_3'), 'price': 0.75})]"/>
         </record> 
     <record id="nexterp_demo_product_9"  model="product.product">
         <field name="name">Marfa Lot 19% tva</field>
@@ -115,7 +115,7 @@
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_177'), 'price': 3.75})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_5'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_10"  model="product.product">
         <field name="name">Marfa Lot 9% tva</field>
@@ -128,7 +128,7 @@
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 9% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 9% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_168'), 'price': 3.75})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_5'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_11"  model="product.product">
         <field name="name">Marfa Lot 5% tva</field>
@@ -141,7 +141,7 @@
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 5% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 5% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_61'), 'price': 1.5})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_5'), 'price': 1.5})]"/>
         </record> 
     <record id="nexterp_demo_product_12"  model="product.product">
         <field name="name">Marfa Lot 0% tva</field>
@@ -154,7 +154,7 @@
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 0% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 0% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_461'), 'price': 0.75})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_5'), 'price': 0.75})]"/>
         </record> 
     <record id="nexterp_demo_product_13"  model="product.product">
         <field name="name">Europaleti</field>
@@ -167,7 +167,7 @@
         <field name="list_price">50</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_181'), 'price': 1.5})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_7'), 'price': 1.5})]"/>
         </record> 
     <record id="nexterp_demo_product_14"  model="product.product">
         <field name="name">Motorina</field>
@@ -180,7 +180,7 @@
         <field name="list_price">10</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_162'), 'price': 4.5})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_7'), 'price': 4.5})]"/>
         </record> 
     <record id="nexterp_demo_product_15"  model="product.product">
         <field name="name">Benzina</field>
@@ -193,7 +193,7 @@
         <field name="list_price">10</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_265'), 'price': 4.5})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_7'), 'price': 4.5})]"/>
         </record> 
     <record id="nexterp_demo_product_16"  model="product.product">
         <field name="name">Lemn de Foc</field>
@@ -206,7 +206,7 @@
         <field name="list_price">500</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_569'), 'price': 322.5})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_7'), 'price': 322.5})]"/>
         </record> 
     <record id="nexterp_demo_product_17"  model="product.product">
         <field name="name">Servicii Transport</field>
@@ -279,7 +279,7 @@
         <field name="list_price">1</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_552'), 'price': 3.75})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_23"  model="product.product">
         <field name="name">Cafea Vrac</field>
@@ -292,7 +292,7 @@
         <field name="list_price">50</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_552'), 'price': 37.5})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 37.5})]"/>
         </record> 
     <record id="nexterp_demo_product_24"  model="product.product">
         <field name="name">Apa Plata</field>
@@ -305,7 +305,7 @@
         <field name="list_price">5</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_541'), 'price': 3.75})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_25"  model="product.product">
         <field name="name">Zahar</field>
@@ -318,7 +318,7 @@
         <field name="list_price">5</field>
         <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_552'), 'price': 3.75})]"/>
+        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_26"  model="product.product">
         <field name="name">Cafea Espresso</field>
