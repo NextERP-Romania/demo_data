@@ -35,6 +35,15 @@ class ResCompany(models.Model):
                     "property_account_expense_id": self.get_account("409000"),
                 }
             )
+            transport_products = self.env["product.product"].search([]).filtered(
+                lambda p: "Transport" in p.name
+            )
+            transport_products.write(
+                {
+                    "property_account_income_id": self.get_account("707000"),
+                    "property_account_expense_id": self.get_account("624000"),
+                }
+            )
             avans_prod = self.env.ref(
                 "l10n_ro_demo_data.nexterp_demo_product_19", raise_if_not_found=False
             )
