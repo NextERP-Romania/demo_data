@@ -54,7 +54,6 @@ class RomaniaTestData(models.Model):
         f = open(os.path.join(data_dir, "orders.csv"), "rb")
         orders = csv.DictReader(codecs.iterdecode(f, "utf-8"))
         for order in orders:
-            print(order)
             if order.get("type") == "sale":
                 self.create_sale_order(order)
             elif order.get("type") == "purchase":
