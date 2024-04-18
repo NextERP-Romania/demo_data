@@ -20,6 +20,7 @@ class ResCompany(models.Model):
         self.ensure_one()
         self.update_company_config()
         self.env["nexterp.demodata"].install_demo_data(company=self)
+        self.env["nexterp.demodata"].create_demo_data_orders(company=self)
 
     def update_company_config(self):
         self.ensure_one()
