@@ -14,7 +14,7 @@ class ResCompany(models.Model):
     def get_account(self, code):
         domain = [("code", "=", code), ("company_id", "=", self.id)]
         account = self.env["account.account"].search(domain, limit=1)
-        return account.id if account else False
+        return account
 
     def install_demo_data(self):
         self.ensure_one()
@@ -32,8 +32,8 @@ class ResCompany(models.Model):
             )
             avans_products.write(
                 {
-                    "property_account_income_id": self.get_account("419000"),
-                    "property_account_expense_id": self.get_account("409000"),
+                    "property_account_income_id": self.get_account("419000").id,
+                    "property_account_expense_id": self.get_account("409000").id,
                 }
             )
             transport_products = self.env["product.product"].search([]).filtered(
@@ -41,10 +41,14 @@ class ResCompany(models.Model):
             )
             transport_products.write(
                 {
-                    "property_account_income_id": self.get_account("707000"),
-                    "property_account_expense_id": self.get_account("624000"),
+                    "property_account_income_id": self.get_account("707000").id,
+                    "property_account_expense_id": self.get_account("624000").id,
+                    "landed_cost_ok": True,
+                    "split_method_landed_cost": "equal",
                 }
             )
+            merchandise_acc = self.get_account("371000")
+            merchandise_acc.l10n_ro_reception_in_progress_account_id = self.get_account("327000")
             avans_prod = self.env.ref(
                 "l10n_ro_demo_data.nexterp_demo_product_19", raise_if_not_found=False
             )
@@ -83,13 +87,13 @@ class ResCompany(models.Model):
                     "website": "https://nexterp.ro",
                     "l10n_ro_account_serv_sale_tax_id": sale_serv_tax,
                     "l10n_ro_account_serv_purchase_tax_id": purch_serv_tax,
-                    "l10n_ro_property_stock_picking_payable_account_id": self.get_account("408000"),
-                    "l10n_ro_property_stock_picking_receivable_account_id": self.get_account("418000"),
-                    "l10n_ro_property_stock_usage_giving_account_id": self.get_account("803500"),
-                    "l10n_ro_property_stock_picking_custody_account_id": self.get_account("803300"),
-                    "l10n_ro_property_uneligible_tax_account_id": self.get_account("442820"),
-                    "l10n_ro_property_trade_discount_received_account_id": self.get_account("609000"),
-                    "l10n_ro_property_trade_discount_granted_account_id": self.get_account("709000"),
+                    "l10n_ro_property_stock_picking_payable_account_id": self.get_account("408000").id,
+                    "l10n_ro_property_stock_picking_receivable_account_id": self.get_account("418000").id,
+                    "l10n_ro_property_stock_usage_giving_account_id": self.get_account("803500").id,
+                    "l10n_ro_property_stock_picking_custody_account_id": self.get_account("803300").id,
+                    "l10n_ro_property_uneligible_tax_account_id": self.get_account("442820").id,
+                    "l10n_ro_property_trade_discount_received_account_id": self.get_account("609000").id,
+                    "l10n_ro_property_trade_discount_granted_account_id": self.get_account("709000").id,
                     "l10n_ro_property_vat_on_payment_position_id": afp_obj.search(
                         [
                             ("name", "=", "Regim TVA la Incasare"),
