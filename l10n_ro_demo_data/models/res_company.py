@@ -26,6 +26,9 @@ class ResCompany(models.Model):
         self.ensure_one()
         acc_obj = self.env["account.account"]
         afp_obj = self.env["account.fiscal.position"]
+        self.env["product.product"].search([
+            ("detailed_type", "=", "product")
+        ]).invoice_policy = "delivery"
         for company in self:
             avans_products = self.env["product.product"].search([]).filtered(
                 lambda p: "Avans" in p.name
