@@ -127,7 +127,7 @@ class ResCompany(models.Model):
                 "group_proforma_sales": True,
                 "group_stock_production_lot": True,
                 "group_stock_multi_locations": True,
-                "extract_single_line_per_tax": False,
+                # "extract_single_line_per_tax": False,
                 # "module_sale_margin": True,
                 # "module_account_invoice_extract": False,
                 # "module_snailmail_account": False,
