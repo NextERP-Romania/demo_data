@@ -4,7 +4,7 @@
 
 {
     "name": "Demo Data Module",
-    "version": "14.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "General",
     "author": "NextERP Romania SRL",
     "website": "https://github.com/OCA/l10n-romania",
