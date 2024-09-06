@@ -31,7 +31,7 @@
         "l10n_ro_etransport",
         "l10n_ro_fiscal_validation",
         "l10n_ro_message_spv",
-        "l10n_ro_nondeductible_vat",
+        # "l10n_ro_nondeductible_vat",
         # "l10n_ro_partner_create_by_vat",
         "l10n_ro_partner_unique",
         "l10n_ro_payment_receipt_report",
