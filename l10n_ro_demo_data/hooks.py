@@ -3,7 +3,7 @@
 
 
 def pre_init_hook(env):
-    env.execute(
+    env.cr.execute(
         """
     UPDATE res_company
     SET anglo_saxon_accounting=True,

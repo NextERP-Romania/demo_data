@@ -262,6 +262,43 @@ class RomaniaTestDataMixin(models.Model):
         vals.update(values)
         return self.env["product.category"].create(vals)
 
+    def update_test_record_product_category(self, category, prod_type="product"):
+        acc_obj = self.env["account.account"]
+        categ_mapping = [
+            ("marfuri", "371000", "607000", "707000"),
+            ("materii_prime", "301000", "601000", "702000"),
+            ("produse_finite", "345000", "711000", "701500"),
+            ("ambalaje", "308000", "608000", "707000"),
+            ("combustibil", "302200", "602200", "707000"),
+            ("consumabile", "302800", "602800", "702000"),
+            ("service", "371000", "628000", "704000"),
+        ]
+        vals = {
+            "property_cost_method": "fifo" if prod_type != "service" else "standard",
+            "property_valuation": "real_time"
+            if prod_type != "service"
+            else "manual_periodic",
+        }
+        line_categ = False
+        for line in categ_mapping:
+            if line[0] == prod_type:
+                line_categ = line
+        if line_categ:
+            stock_acc = acc_obj.search([("code", "=", line_categ[1])])
+            expense_acc = acc_obj.search([("code", "=", line_categ[2])])
+            income_acc = acc_obj.search([("code", "=", line_categ[3])])
+            vals.update(
+                {
+                    "property_stock_valuation_account_id": stock_acc.id,
+                    "property_stock_account_input_categ_id": stock_acc.id,
+                    "property_stock_account_output_categ_id": stock_acc.id,
+                    "property_account_income_categ_id": income_acc.id,
+                    "property_account_expense_categ_id": expense_acc.id,
+                }
+            )
+        category.write(vals)
+        return category
+
     def create_test_record_product(self, country_code, prod_type="product"):
         values = self._context.get("values", {})
         language = "{}_{}".format(country_code.lower(), country_code.upper())

@@ -30,6 +30,16 @@ class ResCompany(models.Model):
             ("detailed_type", "=", "product")
         ]).invoice_policy = "delivery"
         for company in self:
+            company.country_id = self.env.ref("base.ro")
+            journals = self.env["account.journal"].search([])
+            if not journals:
+                chart_template = self.env['account.chart.template']._select_chart_template(company.country_id)
+                self.env['account.chart.template']._load(
+                    'ro',
+                    company,
+                    install_demo=False,
+                )
+            self.env["nexterp.demodata"].configure_product_categories(company)
             avans_products = self.env["product.product"].search([]).filtered(
                 lambda p: "Avans" in p.name
             )

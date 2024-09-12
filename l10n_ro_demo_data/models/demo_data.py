@@ -39,12 +39,31 @@ class RomaniaTestData(models.Model):
     @api.model
     def install_demo_data(self, company=False):
         self = self.with_company(company or self.env.company)
+        user_group_id = self.env['ir.model.data']._xmlid_to_res_id('base.group_user')
+        internal_users = self.env["res.users"].search([]).filtered_domain([('groups_id', 'in', [user_group_id])])
         acc_group = self.env.ref("account.group_account_user")
-        users = self.env["res.users"].search([])
-        for user in users:
+        acc_aut_group = self.env.ref("stock_account.group_stock_accounting_automatic")
+        for user in internal_users:
             if acc_group and not user.has_group("account.group_account_user"):
                 user.write({"groups_id": [(4, acc_group.id)]})
-    
+            if acc_aut_group and not user.has_group("stock_account.group_stock_accounting_automatic"):
+                user.write({"groups_id": [(4, acc_aut_group.id)]})
+    @api.model
+    def configure_product_categories(self, company):
+        categs = [
+            ("l10n_ro_demo_data.category_servicii", "service"),
+            ("l10n_ro_demo_data.category_materii_prime", "materii_prime"), 
+            ("l10n_ro_demo_data.category_produse_finite", "produse_finite"), 
+            ("l10n_ro_demo_data.category_marfuri", "marfuri"),
+            ("l10n_ro_demo_data.category_marfuri_avg", "marfuri"),
+            ("l10n_ro_demo_data.category_ambalaje", "ambalaje"),
+            ("l10n_ro_demo_data.category_combustibil", "combustibil"),
+            ("l10n_ro_demo_data.category_consumabile", "consumabile"),
+        ]
+        for categ in categs:
+            self.update_test_record_product_category(
+                self.env.ref(categ[0]).with_company(company), categ[1])
+
     @api.model
     def create_demo_data_orders(self, company=False):
         self = self.with_company(company or self.env.company)
@@ -133,8 +152,8 @@ class RomaniaTestData(models.Model):
                 if picking.state == "waiting":
                     picking.action_assign()
                 if picking.state == "assigned":
-                    for ml in picking.move_line_ids:
-                        ml.qty_done = ml.reserved_qty
+                    for move in picking.move_ids:
+                        move._set_quantity_done(sum(ml.quantity for ml in move.move_line_ids))
                     picking._action_done()
                 if picking.state == "done":
                     invoices = sale._create_invoices(final=True)
@@ -227,7 +246,8 @@ class RomaniaTestData(models.Model):
                     return_pick = self.env["stock.picking"].browse(res["res_id"])
                     return_pick.action_confirm()
                     return_pick.action_assign()
-                    return_pick.move_line_ids.qty_done = -1 * float(values.get("stock_qty2"))
+                    for move in return_pick.move_ids:
+                        move._set_quantity_done(-1 * float(values.get("stock_qty2")))
                     return_pick._action_done()
                     picking = return_pick
             else:
@@ -243,7 +263,9 @@ class RomaniaTestData(models.Model):
                         }
                     )
                     qty_done = float(values.get("stock_qty") if step == 1 else values.get("stock_qty2"))
-                    picking.move_line_ids.qty_done = qty_done
+                    
+                    for move in picking.move_ids:
+                        move._set_quantity_done(qty_done)
                     picking.button_validate()
                     if picking.state == "assigned":
                         picking._action_done()
