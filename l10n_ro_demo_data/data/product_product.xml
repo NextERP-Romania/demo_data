@@ -9,8 +9,8 @@
         <field name="default_code">demo_product_1</field>
         <field name="barcode">demo_product_1</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_2"  model="product.product">
@@ -22,8 +22,8 @@
         <field name="default_code">demo_product_2</field>
         <field name="barcode">demo_product_2</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 9% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 9% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 9% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 9% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_3"  model="product.product">
@@ -35,8 +35,8 @@
         <field name="default_code">demo_product_3</field>
         <field name="barcode">demo_product_3</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 5% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 5% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 5% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 5% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 1.5})]"/>
         </record> 
     <record id="nexterp_demo_product_4"  model="product.product">
@@ -48,8 +48,8 @@
         <field name="default_code">demo_product_4</field>
         <field name="barcode">demo_product_4</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 0% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 0% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 0% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 0% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 0.75})]"/>
         </record> 
     <record id="nexterp_demo_product_5"  model="product.product">
@@ -61,8 +61,8 @@
         <field name="default_code">demo_product_5</field>
         <field name="barcode">demo_product_5</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_3'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_6"  model="product.product">
@@ -74,8 +74,8 @@
         <field name="default_code">demo_product_6</field>
         <field name="barcode">demo_product_6</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 9% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 9% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 9% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 9% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_3'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_7"  model="product.product">
@@ -87,8 +87,8 @@
         <field name="default_code">demo_product_7</field>
         <field name="barcode">demo_product_7</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 5% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 5% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 5% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 5% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_3'), 'price': 1.5})]"/>
         </record> 
     <record id="nexterp_demo_product_8"  model="product.product">
@@ -100,8 +100,8 @@
         <field name="default_code">demo_product_8</field>
         <field name="barcode">demo_product_8</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 0% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 0% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 0% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 0% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_3'), 'price': 0.75})]"/>
         </record> 
     <record id="nexterp_demo_product_9"  model="product.product">
@@ -113,8 +113,8 @@
         <field name="default_code">demo_product_9</field>
         <field name="barcode">demo_product_9</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_5'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_10"  model="product.product">
@@ -126,8 +126,8 @@
         <field name="default_code">demo_product_10</field>
         <field name="barcode">demo_product_10</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 9% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 9% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 9% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 9% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_5'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_11"  model="product.product">
@@ -139,8 +139,8 @@
         <field name="default_code">demo_product_11</field>
         <field name="barcode">demo_product_11</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 5% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 5% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 5% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 5% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_5'), 'price': 1.5})]"/>
         </record> 
     <record id="nexterp_demo_product_12"  model="product.product">
@@ -152,8 +152,8 @@
         <field name="default_code">demo_product_12</field>
         <field name="barcode">demo_product_12</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 0% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 0% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 0% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 0% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_5'), 'price': 0.75})]"/>
         </record> 
     <record id="nexterp_demo_product_13"  model="product.product">
@@ -165,8 +165,8 @@
         <field name="default_code">demo_product_13</field>
         <field name="barcode">demo_product_13</field>
         <field name="list_price">50</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_7'), 'price': 1.5})]"/>
         </record> 
     <record id="nexterp_demo_product_14"  model="product.product">
@@ -178,8 +178,8 @@
         <field name="default_code">demo_product_14</field>
         <field name="barcode">demo_product_14</field>
         <field name="list_price">10</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_7'), 'price': 4.5})]"/>
         </record> 
     <record id="nexterp_demo_product_15"  model="product.product">
@@ -191,8 +191,8 @@
         <field name="default_code">demo_product_15</field>
         <field name="barcode">demo_product_15</field>
         <field name="list_price">10</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_7'), 'price': 4.5})]"/>
         </record> 
     <record id="nexterp_demo_product_16"  model="product.product">
@@ -204,8 +204,8 @@
         <field name="default_code">demo_product_16</field>
         <field name="barcode">demo_product_16</field>
         <field name="list_price">500</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_7'), 'price': 322.5})]"/>
         </record> 
     <record id="nexterp_demo_product_17"  model="product.product">
@@ -217,8 +217,8 @@
         <field name="default_code">demo_product_17</field>
         <field name="barcode">demo_product_17</field>
         <field name="list_price">0</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Servicii')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Servicii')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Services')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Services')]" model="account.tax"/>
     </record> 
     <record id="nexterp_demo_product_18"  model="product.product">
         <field name="name">Servicii publicitate</field>
@@ -229,8 +229,8 @@
         <field name="default_code">demo_product_18</field>
         <field name="barcode">demo_product_18</field>
         <field name="list_price">0</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Servicii')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Servicii')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Services')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Services')]" model="account.tax"/>
     </record> 
     <record id="nexterp_demo_product_19"  model="product.product">
         <field name="name">Avans Clienti-Furnizori 19% tva</field>
@@ -241,8 +241,8 @@
         <field name="default_code">demo_product_19</field>
         <field name="barcode">demo_product_19</field>
         <field name="list_price">0</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Servicii')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Servicii')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Services')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Services')]" model="account.tax"/>
     </record> 
     <record id="nexterp_demo_product_20"  model="product.product">
         <field name="name">Avans Clienti-Furnizori 9% tva</field>
@@ -253,8 +253,8 @@
         <field name="default_code">demo_product_20</field>
         <field name="barcode">demo_product_20</field>
         <field name="list_price">0</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 9% Servicii')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 9% Servicii')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 9% Services')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 9% Services')]" model="account.tax"/>
     </record> 
     <record id="nexterp_demo_product_21"  model="product.product">
         <field name="name">Avans Clienti-Furnizori 5% tva</field>
@@ -265,8 +265,8 @@
         <field name="default_code">demo_product_21</field>
         <field name="barcode">demo_product_21</field>
         <field name="list_price">0</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 5% Servicii')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 5% Servicii')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 5% Services')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 5% Services')]" model="account.tax"/>
     </record> 
     <record id="nexterp_demo_product_22"  model="product.product">
         <field name="name">Filtru cafea</field>
@@ -277,8 +277,8 @@
         <field name="default_code">demo_product_22</field>
         <field name="barcode">demo_product_22</field>
         <field name="list_price">1</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_23"  model="product.product">
@@ -290,8 +290,8 @@
         <field name="default_code">demo_product_23</field>
         <field name="barcode">demo_product_23</field>
         <field name="list_price">50</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 37.5})]"/>
         </record> 
     <record id="nexterp_demo_product_24"  model="product.product">
@@ -303,8 +303,8 @@
         <field name="default_code">demo_product_24</field>
         <field name="barcode">demo_product_24</field>
         <field name="list_price">5</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_25"  model="product.product">
@@ -316,8 +316,8 @@
         <field name="default_code">demo_product_25</field>
         <field name="barcode">demo_product_25</field>
         <field name="list_price">5</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
         </record> 
     <record id="nexterp_demo_product_26"  model="product.product">
@@ -329,7 +329,7 @@
         <field name="default_code">demo_product_26</field>
         <field name="barcode">demo_product_26</field>
         <field name="list_price">0</field>
-        <field name="taxes_id" search="[('name', '=', 'TVA colectat 19% Bunuri')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('name', '=', 'TVA deductibil 19% Bunuri')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
     </record> 
 </odoo>

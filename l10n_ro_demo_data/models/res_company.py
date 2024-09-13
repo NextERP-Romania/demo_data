@@ -75,13 +75,13 @@ class ResCompany(models.Model):
             # Add services taxes to configuration
             sale_serv_tax = self.env["account.tax"].search(
                 [
-                    ("name", "=", "TVA colectat 19% Servicii"),
+                    ("description", "=", "VAT collected 19% Services"),
                     ("company_id", "=", company.id),
                 ]
             )
             purch_serv_tax = self.env["account.tax"].search(
                 [
-                    ("name", "=", "TVA deductibil 19% Servicii"),
+                    ("description", "=", "VAT deductible 19% Services"),
                     ("company_id", "=", company.id),
                 ]
             )
@@ -109,13 +109,13 @@ class ResCompany(models.Model):
                     "l10n_ro_property_trade_discount_granted_account_id": self.get_account("709000").id,
                     "l10n_ro_property_vat_on_payment_position_id": afp_obj.search(
                         [
-                            ("name", "=", "Regim TVA la Incasare"),
+                            ("name", "=", "VAT collection system"),
                             ("company_id", "=", company.id),
                         ]
                     ),
                     "l10n_ro_property_inverse_taxation_position_id": afp_obj.search(
                         [
-                            ("name", "=", "Regim Taxare Inversa"),
+                            ("name", "=", "Reverse Tax Regime"),
                             ("company_id", "=", company.id),
                         ]
                     ),
