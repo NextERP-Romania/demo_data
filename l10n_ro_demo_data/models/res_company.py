@@ -40,6 +40,7 @@ class ResCompany(models.Model):
                     install_demo=False,
                 )
             self.env["nexterp.demodata"].configure_product_categories(company)
+            self.env["nexterp.demodata"].configure_product_taxes(company)
             avans_products = self.env["product.product"].search([]).filtered(
                 lambda p: "Avans" in p.name
             )

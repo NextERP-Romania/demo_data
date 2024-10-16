@@ -48,6 +48,7 @@ class RomaniaTestData(models.Model):
                 user.write({"groups_id": [(4, acc_group.id)]})
             if acc_aut_group and not user.has_group("stock_account.group_stock_accounting_automatic"):
                 user.write({"groups_id": [(4, acc_aut_group.id)]})
+
     @api.model
     def configure_product_categories(self, company):
         categs = [
@@ -63,6 +64,51 @@ class RomaniaTestData(models.Model):
         for categ in categs:
             self.update_test_record_product_category(
                 self.env.ref(categ[0]).with_company(company), categ[1])
+
+    @api.model
+    def configure_product_taxes(self, company):
+        product_taxes = [
+            ('l10n_ro_demo_data.nexterp_demo_product_1', 'VAT collected 19% Goods', 'VAT deductible 19% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_2', 'VAT collected 9% Goods', 'VAT deductible 9% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_3', 'VAT collected 5% Goods', 'VAT deductible 5% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_4', 'VAT collected 0% Goods', 'VAT deductible 0% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_5', 'VAT collected 19% Goods', 'VAT deductible 19% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_6', 'VAT collected 9% Goods', 'VAT deductible 9% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_7', 'VAT collected 5% Goods', 'VAT deductible 5% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_8', 'VAT collected 0% Goods', 'VAT deductible 0% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_9', 'VAT collected 19% Goods', 'VAT deductible 19% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_10', 'VAT collected 9% Goods', 'VAT deductible 9% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_11', 'VAT collected 5% Goods', 'VAT deductible 5% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_12', 'VAT collected 0% Goods', 'VAT deductible 0% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_13', 'VAT collected 19% Goods', 'VAT deductible 19% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_14', 'VAT collected 19% Goods', 'VAT deductible 19% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_15', 'VAT collected 19% Goods', 'VAT deductible 19% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_16', 'VAT collected 19% Goods', 'VAT deductible 19% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_17', 'VAT collected 19% Services', 'VAT deductible 19% Services'),
+            ('l10n_ro_demo_data.nexterp_demo_product_18', 'VAT collected 19% Services', 'VAT deductible 19% Services'),
+            ('l10n_ro_demo_data.nexterp_demo_product_19', 'VAT collected 19% Services', 'VAT deductible 19% Services'),
+            ('l10n_ro_demo_data.nexterp_demo_product_20', 'VAT collected 9% Services', 'VAT deductible 9% Services'),
+            ('l10n_ro_demo_data.nexterp_demo_product_21', 'VAT collected 5% Services', 'VAT deductible 5% Services'),
+            ('l10n_ro_demo_data.nexterp_demo_product_22', 'VAT collected 19% Goods', 'VAT deductible 19% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_23', 'VAT collected 19% Goods', 'VAT deductible 19% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_24', 'VAT collected 19% Goods', 'VAT deductible 19% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_25', 'VAT collected 19% Goods', 'VAT deductible 19% Goods'),
+            ('l10n_ro_demo_data.nexterp_demo_product_26', 'VAT collected 19% Goods', 'VAT deductible 19% Goods'),
+        ]
+        for pr_tax in product_taxes:
+            product = self.env.ref(pr_tax[0], raise_if_not_found=False)
+            if product:
+                product = product.with_company(company)
+                sale_tax = self.env["account.tax"].search(
+                    [("description", "=", pr_tax[1]), ("company_id", "=", company.id)]
+                )
+                purchase_tax = self.env["account.tax"].search(
+                    [("description", "=", pr_tax[2]), ("company_id", "=", company.id)]
+                )
+                if sale_tax:
+                    product.taxes_id = sale_tax
+                if purchase_tax:
+                    product.supplier_taxes_id = purchase_tax
 
     @api.model
     def create_demo_data_orders(self, company=False):
@@ -88,6 +134,8 @@ class RomaniaTestData(models.Model):
         if not values.get("product_id"):
             prod_type = random.choice(["product", "service"])
             values["product_id"] = self._get_random_product(prod_type)
+        if values.get("product_id"):
+            values["tax_id"] = values["product_id"].taxes_id.ids
         partner = values["partner_id"]
         country = partner.country_id
         sale_date = random.choice(days_last_month())
@@ -96,6 +144,7 @@ class RomaniaTestData(models.Model):
                 "product_uom_qty": values.get("qty", 1),
                 "price_unit": values.get("price", 100),
                 "discount": values.get("discount", 0),
+                "tax_id": [(6, 0, values.get("tax_id"))],
             },)
         ]
         fpos = False
@@ -182,13 +231,16 @@ class RomaniaTestData(models.Model):
         if not values.get("product_id"):
             prod_type = random.choice(["product", "service"])
             values["product_id"] = self._get_random_product(prod_type)
+        if values.get("product_id"):
+            values["taxes_id"] = values["product_id"].supplier_taxes_id.ids
         partner = values["partner_id"]
         country = partner.country_id
         purchase_date = random.choice(days_last_month())
         order_line = [(0, 0, {
                 "product_id": values["product_id"].id,
                 "product_qty": values.get("qty", 1),
-                "price_unit": values.get("price", 80)
+                "price_unit": values.get("price", 80),
+                "taxes_id": [(6, 0, values.get("taxes_id"))],
             },)
         ]
         fpos = False
