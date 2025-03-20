@@ -6,8 +6,8 @@
     "name": "Demo Data Module",
     "version": "14.0.1.0.0",
     "category": "General",
-    "author": "NextERP Romania,Asociatia Comunitatii Odoo",
-    "website": "https://github.com/odoo-romania/demo_data",
+    "author": "NextERP Romania",
+    "website": "https://github.com/NextERP-Romania/demo_data",
     "summary": """Create demo data for Romanian Localisation""",
     "depends": [
         "l10n_ro_account_anaf_sync",
