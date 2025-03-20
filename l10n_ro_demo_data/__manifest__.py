@@ -6,8 +6,8 @@
     "name": "Demo Data Module",
     "version": "15.0.1.0.0",
     "category": "General",
-    "author": "NextERP Romania SRL",
-    "website": "https://github.com/OCA/l10n-romania",
+    "author": "NextERP Romania",
+    "website": "https://github.com/NextERP-Romania/demo_data",
     "summary": """Create demo data for Romanian Localisation""",
     "depends": [
         "l10n_ro_account",
