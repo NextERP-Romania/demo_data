@@ -172,8 +172,7 @@ class RomaniaTestData(models.Model):
             if product_id:
                 adv_wiz = self.env['sale.advance.payment.inv'].with_context(active_ids=[sale.id]).create({
                     'advance_payment_method': 'percentage',
-                    'amount': 50.0,
-                    'product_id': product_id.id,
+                    'amount': 50.0,  
                 })
                 act = adv_wiz.with_context(open_invoices=True).create_invoices()
                 invoice = self.env['account.move'].browse(act['res_id'])
@@ -262,16 +261,18 @@ class RomaniaTestData(models.Model):
         purchase.onchange_partner_id()
         purchase.button_confirm()
         if values.get("reception_in_progress") != "0":
-            purchase.action_create_reception_in_progress_invoice()
-            invoice = purchase.invoice_ids[0]
-            invoice.write(
-                {
-                    "date": purchase.date_order,
-                    "invoice_date": purchase.date_order,
-                    "invoice_date_due": purchase.date_order,
-                }
-            )
-            invoice.action_post()
+            pass
+            # modulul l10n_ro_stock_account_reception_in_progress nu este updatat pe 18.0
+            # purchase.action_create_reception_in_progress_invoice()
+            # invoice = purchase.invoice_ids[0]
+            # invoice.write(
+            #     {
+            #         "date": purchase.date_order,
+            #         "invoice_date": purchase.date_order,
+            #         "invoice_date_due": purchase.date_order,
+            #     }
+            # )
+            # invoice.action_post()
         self.receive_and_invoice_purchases(purchase, values)
         if values.get("step") == "2":
             self.with_context(step=2).receive_and_invoice_purchases(purchase, values)
@@ -294,7 +295,7 @@ class RomaniaTestData(models.Model):
                     )
                     return_wiz = stock_return_picking_form.save()
                     return_wiz.product_return_moves.write({"quantity": -1 * float(values.get("stock_qty2")), "to_refund": True})
-                    res = return_wiz.create_returns()
+                    res = return_wiz.action_create_returns()
                     return_pick = self.env["stock.picking"].browse(res["res_id"])
                     return_pick.action_confirm()
                     return_pick.action_assign()

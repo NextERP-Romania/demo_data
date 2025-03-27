@@ -12,7 +12,7 @@ class ResCompany(models.Model):
     _inherit = "res.company"
 
     def get_account(self, code):
-        domain = [("code", "=", code), ("company_id", "=", self.id)]
+        domain = [("code", "=", code), ("company_ids", "in", [self.id])]
         account = self.env["account.account"].search(domain, limit=1)
         return account
 
@@ -27,7 +27,7 @@ class ResCompany(models.Model):
         acc_obj = self.env["account.account"]
         afp_obj = self.env["account.fiscal.position"]
         self.env["product.product"].search([
-            ("detailed_type", "=", "product")
+            ("type", "=", "consu")
         ]).invoice_policy = "delivery"
         for company in self:
             company.country_id = self.env.ref("base.ro")
@@ -53,16 +53,18 @@ class ResCompany(models.Model):
             transport_products = self.env["product.product"].search([]).filtered(
                 lambda p: "Transport" in p.name
             )
+            
             transport_products.write(
                 {
                     "property_account_income_id": self.get_account("707000").id,
                     "property_account_expense_id": self.get_account("624000").id,
-                    "landed_cost_ok": True,
                     "split_method_landed_cost": "equal",
                 }
             )
+            transport_products.product_tmpl_id.write({ "landed_cost_ok": True, })
             merchandise_acc = self.get_account("371000")
-            merchandise_acc.l10n_ro_reception_in_progress_account_id = self.get_account("327000")
+            # module_stock_account_reception_in_progress nu este updatat in 18.0
+            # merchandise_acc.l10n_ro_reception_in_progress_account_id = self.get_account("327000")
             avans_prod = self.env.ref(
                 "l10n_ro_demo_data.nexterp_demo_product_19", raise_if_not_found=False
             )

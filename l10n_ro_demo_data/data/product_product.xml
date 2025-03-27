@@ -3,7 +3,7 @@
     <record id="nexterp_demo_product_1"  model="product.product">
         <field name="name">Marfa Fifo 19% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_1</field>
@@ -16,7 +16,7 @@
     <record id="nexterp_demo_product_2"  model="product.product">
         <field name="name">Marfa Fifo 9% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_2</field>
@@ -29,7 +29,7 @@
     <record id="nexterp_demo_product_3"  model="product.product">
         <field name="name">Marfa Fifo 5% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_3</field>
@@ -42,7 +42,7 @@
     <record id="nexterp_demo_product_4"  model="product.product">
         <field name="name">Marfa Fifo 0% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_4</field>
@@ -55,7 +55,7 @@
     <record id="nexterp_demo_product_5"  model="product.product">
         <field name="name">Marfa Average 19% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri Average')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_5</field>
@@ -68,7 +68,7 @@
     <record id="nexterp_demo_product_6"  model="product.product">
         <field name="name">Marfa Average 9% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri Average')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_6</field>
@@ -81,7 +81,7 @@
     <record id="nexterp_demo_product_7"  model="product.product">
         <field name="name">Marfa Average 5% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri Average')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_7</field>
@@ -94,7 +94,7 @@
     <record id="nexterp_demo_product_8"  model="product.product">
         <field name="name">Marfa Average 0% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri Average')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_8</field>
@@ -107,7 +107,7 @@
     <record id="nexterp_demo_product_9"  model="product.product">
         <field name="name">Marfa Lot 19% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_9</field>
@@ -120,7 +120,7 @@
     <record id="nexterp_demo_product_10"  model="product.product">
         <field name="name">Marfa Lot 9% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_10</field>
@@ -133,7 +133,7 @@
     <record id="nexterp_demo_product_11"  model="product.product">
         <field name="name">Marfa Lot 5% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_11</field>
@@ -146,7 +146,7 @@
     <record id="nexterp_demo_product_12"  model="product.product">
         <field name="name">Marfa Lot 0% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_12</field>
@@ -159,7 +159,7 @@
     <record id="nexterp_demo_product_13"  model="product.product">
         <field name="name">Europaleti</field>
         <field name="categ_id" search="[('name', '=', 'Ambalaje')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_13</field>
@@ -172,7 +172,7 @@
     <record id="nexterp_demo_product_14"  model="product.product">
         <field name="name">Motorina</field>
         <field name="categ_id" search="[('name', '=', 'Combustibil')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_litre"/>
         <field name="uom_po_id" ref="uom.product_uom_litre"/>
         <field name="default_code">demo_product_14</field>
@@ -185,7 +185,7 @@
     <record id="nexterp_demo_product_15"  model="product.product">
         <field name="name">Benzina</field>
         <field name="categ_id" search="[('name', '=', 'Combustibil')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_litre"/>
         <field name="uom_po_id" ref="uom.product_uom_litre"/>
         <field name="default_code">demo_product_15</field>
@@ -198,7 +198,7 @@
     <record id="nexterp_demo_product_16"  model="product.product">
         <field name="name">Lemn de Foc</field>
         <field name="categ_id" search="[('name', '=', 'Combustibil')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_cubic_meter"/>
         <field name="uom_po_id" ref="uom.product_uom_cubic_meter"/>
         <field name="default_code">demo_product_16</field>
@@ -271,7 +271,7 @@
     <record id="nexterp_demo_product_22"  model="product.product">
         <field name="name">Filtru cafea</field>
         <field name="categ_id" search="[('name', '=', 'Consumabile')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_22</field>
@@ -284,7 +284,7 @@
     <record id="nexterp_demo_product_23"  model="product.product">
         <field name="name">Cafea Vrac</field>
         <field name="categ_id" search="[('name', '=', 'Materii Prime')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_kgm"/>
         <field name="uom_po_id" ref="uom.product_uom_kgm"/>
         <field name="default_code">demo_product_23</field>
@@ -297,7 +297,7 @@
     <record id="nexterp_demo_product_24"  model="product.product">
         <field name="name">Apa Plata</field>
         <field name="categ_id" search="[('name', '=', 'Materii Prime')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_24</field>
@@ -310,7 +310,7 @@
     <record id="nexterp_demo_product_25"  model="product.product">
         <field name="name">Zahar</field>
         <field name="categ_id" search="[('name', '=', 'Materii Prime')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_kgm"/>
         <field name="uom_po_id" ref="uom.product_uom_kgm"/>
         <field name="default_code">demo_product_25</field>
@@ -323,7 +323,7 @@
     <record id="nexterp_demo_product_26"  model="product.product">
         <field name="name">Cafea Espresso</field>
         <field name="categ_id" search="[('name', '=', 'Produse Finite')]" model="product.category"/>
-        <field name="type">product</field>
+        <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
         <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_26</field>
