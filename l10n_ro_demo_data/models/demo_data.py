@@ -12,7 +12,6 @@ from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, models
-from odoo.tests import Form
 
 _logger = logging.getLogger(__name__)
 
@@ -288,15 +287,10 @@ class RomaniaTestData(models.Model):
                 # Create return to initial reception
                 picking = purchase.picking_ids.filtered(lambda x: x.state == "done")
                 if picking:
-                    stock_return_picking_form = Form(
-                        self.env["stock.return.picking"].with_context(
-                            active_ids=picking.ids, active_id=picking.ids[0], active_model="stock.picking"
-                        )
-                    )
-                    return_wiz = stock_return_picking_form.save()
+                    return_wiz = self.env['stock.return.picking'].with_context(active_id=picking.id, active_model='stock.picking').create({})
                     return_wiz.product_return_moves.write({"quantity": -1 * float(values.get("stock_qty2")), "to_refund": True})
-                    res = return_wiz.action_create_returns()
-                    return_pick = self.env["stock.picking"].browse(res["res_id"])
+                    res = return_wizard.action_create_returns()
+                    picking2 = self.PickingObj.browse(res["res_id"])
                     return_pick.action_confirm()
                     return_pick.action_assign()
                     for move in return_pick.move_ids:
