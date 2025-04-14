@@ -31,13 +31,15 @@ class ResCompany(models.Model):
         ]).invoice_policy = "delivery"
         for company in self:
             company.country_id = self.env.ref("base.ro")
+            company.partner_id.vat = "RO39187746"
+            company.partner_id.ro_vat_change()
             journals = self.env["account.journal"].search([])
             if not journals:
-                chart_template = self.env['account.chart.template']._select_chart_template(company.country_id)
-                self.env['account.chart.template']._load(
+                self.env['account.chart.template'].try_loading(
                     'ro',
                     company,
                     install_demo=False,
+                    force_create=False,
                 )
             self.env["nexterp.demodata"].configure_product_categories(company)
             self.env["nexterp.demodata"].configure_product_taxes(company)
@@ -89,14 +91,13 @@ class ResCompany(models.Model):
                 ]
             )
             _logger.info("Update and configure company %s data." % (company.name))
-            company.partner_id.vat = "RO39187746"
-            company.partner_id.ro_vat_change()
             company.write(
                 {
-                    # "caen_code": "6202",
-                    "anglo_saxon_accounting": True,
                     "l10n_ro_accounting": True,
-                    "l10n_ro_stock_acc_price_diff": True,
+                    "account_storno": True,
+                    "anglo_saxon_accounting": True,
+                    "chart_template": "ro",
+                    #"l10n_ro_stock_acc_price_diff": True,
                     "company_registry": "J35/1254/2018",
                     "phone": "0770816455",
                     "email": "contact@nexterp.ro",
@@ -125,11 +126,10 @@ class ResCompany(models.Model):
                     "l10n_ro_no_signature_text": inv_text,
                 }
             )
-        config = self.env['res.config.settings'].create({})
-        config.write(
-            {
-                
-                "company_id": self.env.company.id,
+            # account_cash_basis_base_account_id
+
+            _logger.info("Configure groups and options for company %s." % (company.name))
+            config = self.env['res.config.settings'].with_company(company).create({
                 "default_invoice_policy": "delivery",
                 "group_multi_currency": True,
                 "group_show_sale_receipts": True,
@@ -147,7 +147,8 @@ class ResCompany(models.Model):
                 # "module_partner_autocomplete": False,
                 # "module_stock_sms": False,
                 # "module_delivery": False,
-            }
-        )
-        config.flush_recordset()
-        config.execute()
+            })
+            config.flush_recordset()
+            config.execute()
+
+        del self.env.registry._auto_install_template

@@ -281,6 +281,7 @@ class RomaniaTestData(models.Model):
     def receive_and_invoice_purchases(self, purchases, values):
         order_type = values.pop("type", False)
         step = self.env.context.get("step", 1)
+        PickingObj = self.env["stock.picking"]
         for purchase in purchases:
             picking = self.env["stock.picking"]
             if step == 2 and float(values.get("stock_qty2")) < 0:
@@ -289,8 +290,8 @@ class RomaniaTestData(models.Model):
                 if picking:
                     return_wiz = self.env['stock.return.picking'].with_context(active_id=picking.id, active_model='stock.picking').create({})
                     return_wiz.product_return_moves.write({"quantity": -1 * float(values.get("stock_qty2")), "to_refund": True})
-                    res = return_wizard.action_create_returns()
-                    picking2 = self.PickingObj.browse(res["res_id"])
+                    res = return_wiz.action_create_returns()
+                    return_pick = PickingObj.browse(res["res_id"])
                     return_pick.action_confirm()
                     return_pick.action_assign()
                     for move in return_pick.move_ids:
