@@ -3,16 +3,6 @@ from odoo import api, fields, models
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    def _l10n_ro_map_vat_country_code(self, country_code):
-        country_code_map = {
-            "RE": "FR",
-            "GP": "FR",
-            "MQ": "FR",
-            "GF": "FR",
-            "EL": "GR",
-        }
-        return country_code_map.get(country_code, country_code)
-
     def _get_l10n_ro_anaf_europe_codes(self):
         europe_codes = []
         europe_group = self.env.ref("base.europe", raise_if_not_found=False)

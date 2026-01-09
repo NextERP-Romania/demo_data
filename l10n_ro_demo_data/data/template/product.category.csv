@@ -1,5 +1,5 @@
 id,parent_id,name,property_cost_method,property_valuation,property_stock_account_input_categ_id,property_stock_account_output_categ_id,property_stock_valuation_account_id,property_account_income_categ_id,property_account_expense_categ_id
-category_servicii,product.product_category_all,Servicii,standard,manual_periodic,,,,704000,628000
+category_servicii,product.product_category_all,Servicii,standard,real_time,,,,704000,628000
 category_materii_prime,product.product_category_all,Materii Prime,fifo,real_time,301000,301000,301000,702000,601000
 category_produse_finite,product.product_category_all,Produse Finite,fifo,real_time,345000,345000,345000,701500,711000
 category_marfuri,product.product_category_all,Marfuri,fifo,real_time,371000,371000,371000,707000,607000

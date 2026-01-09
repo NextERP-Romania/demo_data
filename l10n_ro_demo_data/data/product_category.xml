@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
     <record id="category_servicii"  model="product.category">
-        <field name="parent_id" ref="product.product_category_all"/>
         <field name="name">Servicii</field>
         <field name="property_cost_method">standard</field>
-        <field name="property_valuation">manual_periodic</field>
-        <field name="property_stock_account_input_categ_id"
-               search="[('code', '=', '')]" model="account.account"/>
-        <field name="property_stock_account_output_categ_id"
-               search="[('code', '=', '')]" model="account.account"/>
+        <field name="property_valuation">real_time</field>
         <field name="property_stock_valuation_account_id"
                search="[('code', '=', '')]" model="account.account"/>
         <field name="property_account_income_categ_id"
@@ -17,14 +12,9 @@
                search="[('code', '=', '628000')]" model="account.account"/>
     </record> 
     <record id="category_materii_prime"  model="product.category">
-        <field name="parent_id" ref="product.product_category_all"/>
         <field name="name">Materii Prime</field>
         <field name="property_cost_method">fifo</field>
         <field name="property_valuation">real_time</field>
-        <field name="property_stock_account_input_categ_id"
-               search="[('code', '=', '301000')]" model="account.account"/>
-        <field name="property_stock_account_output_categ_id"
-               search="[('code', '=', '301000')]" model="account.account"/>
         <field name="property_stock_valuation_account_id"
                search="[('code', '=', '301000')]" model="account.account"/>
         <field name="property_account_income_categ_id"
@@ -33,14 +23,9 @@
                search="[('code', '=', '601000')]" model="account.account"/>
     </record> 
     <record id="category_produse_finite"  model="product.category">
-        <field name="parent_id" ref="product.product_category_all"/>
         <field name="name">Produse Finite</field>
         <field name="property_cost_method">fifo</field>
         <field name="property_valuation">real_time</field>
-        <field name="property_stock_account_input_categ_id"
-               search="[('code', '=', '345000')]" model="account.account"/>
-        <field name="property_stock_account_output_categ_id"
-               search="[('code', '=', '345000')]" model="account.account"/>
         <field name="property_stock_valuation_account_id"
                search="[('code', '=', '345000')]" model="account.account"/>
         <field name="property_account_income_categ_id"
@@ -49,14 +34,9 @@
                search="[('code', '=', '711000')]" model="account.account"/>
     </record> 
     <record id="category_marfuri"  model="product.category">
-        <field name="parent_id" ref="product.product_category_all"/>
         <field name="name">Marfuri</field>
         <field name="property_cost_method">fifo</field>
         <field name="property_valuation">real_time</field>
-        <field name="property_stock_account_input_categ_id"
-               search="[('code', '=', '371000')]" model="account.account"/>
-        <field name="property_stock_account_output_categ_id"
-               search="[('code', '=', '371000')]" model="account.account"/>
         <field name="property_stock_valuation_account_id"
                search="[('code', '=', '371000')]" model="account.account"/>
         <field name="property_account_income_categ_id"
@@ -65,14 +45,9 @@
                search="[('code', '=', '607000')]" model="account.account"/>
     </record> 
     <record id="category_marfuri_avg"  model="product.category">
-        <field name="parent_id" ref="product.product_category_all"/>
         <field name="name">Marfuri Average</field>
         <field name="property_cost_method">average</field>
         <field name="property_valuation">real_time</field>
-        <field name="property_stock_account_input_categ_id"
-               search="[('code', '=', '371000')]" model="account.account"/>
-        <field name="property_stock_account_output_categ_id"
-               search="[('code', '=', '371000')]" model="account.account"/>
         <field name="property_stock_valuation_account_id"
                search="[('code', '=', '371000')]" model="account.account"/>
         <field name="property_account_income_categ_id"
@@ -81,14 +56,9 @@
                search="[('code', '=', '607000')]" model="account.account"/>
     </record> 
     <record id="category_ambalaje"  model="product.category">
-        <field name="parent_id" ref="product.product_category_all"/>
         <field name="name">Ambalaje</field>
         <field name="property_cost_method">fifo</field>
         <field name="property_valuation">real_time</field>
-        <field name="property_stock_account_input_categ_id"
-               search="[('code', '=', '381000')]" model="account.account"/>
-        <field name="property_stock_account_output_categ_id"
-               search="[('code', '=', '381000')]" model="account.account"/>
         <field name="property_stock_valuation_account_id"
                search="[('code', '=', '381000')]" model="account.account"/>
         <field name="property_account_income_categ_id"
@@ -97,14 +67,9 @@
                search="[('code', '=', '608000')]" model="account.account"/>
     </record> 
     <record id="category_combustibil"  model="product.category">
-        <field name="parent_id" ref="product.product_category_all"/>
         <field name="name">Combustibil</field>
         <field name="property_cost_method">fifo</field>
         <field name="property_valuation">real_time</field>
-        <field name="property_stock_account_input_categ_id"
-               search="[('code', '=', '302200')]" model="account.account"/>
-        <field name="property_stock_account_output_categ_id"
-               search="[('code', '=', '302200')]" model="account.account"/>
         <field name="property_stock_valuation_account_id"
                search="[('code', '=', '302200')]" model="account.account"/>
         <field name="property_account_income_categ_id"
@@ -113,14 +78,9 @@
                search="[('code', '=', '602200')]" model="account.account"/>
     </record> 
     <record id="category_consumabile"  model="product.category">
-        <field name="parent_id" ref="product.product_category_all"/>
         <field name="name">Consumabile</field>
         <field name="property_cost_method">fifo</field>
         <field name="property_valuation">real_time</field>
-        <field name="property_stock_account_input_categ_id"
-               search="[('code', '=', '302800')]" model="account.account"/>
-        <field name="property_stock_account_output_categ_id"
-               search="[('code', '=', '302800')]" model="account.account"/>
         <field name="property_stock_valuation_account_id"
                search="[('code', '=', '302800')]" model="account.account"/>
         <field name="property_account_income_categ_id"

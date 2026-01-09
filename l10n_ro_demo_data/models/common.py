@@ -1,111 +1,65 @@
-# Copyright 2020 NextERP Romania SRL
-# License OPL-1.0 or later
-# (https://www.odoo.com/documentation/user/14.0/legal/licenses/licenses.html#).
+# Copyright (C) 2020 Terrabit
+# Copyright (C) 2025 NextERP Romania SRL
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import logging
-import random
-import os
-import csv
+import ast
 import codecs
-from datetime import date, timedelta
+import csv
+import logging
+import os
 
-from dateutil.relativedelta import relativedelta
+from odoo.tests import Form, tagged
+from odoo.tools import float_compare
 
-from odoo import api, models
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 _logger = logging.getLogger(__name__)
 
-def days_last_month():
-    last_month = date.today() + relativedelta(
-        months=-1, day=1, hour=0, minute=0, second=0, microsecond=0
-    )
-    m = last_month.month
-    y = last_month.year
-    ndays = (date(y, m + 1, 1) - date(y, m, 1)).days
-    d1 = date(y, m, 1)
-    d2 = date(y, m, ndays)
-    delta = d2 - d1
-    return [
-        (d1 + timedelta(days=i)).strftime("%Y-%m-%d") for i in range(delta.days + 1)
-    ]
 
+@tagged("post_install", "-at_install")
+class TestROStockCommon(AccountTestInvoicingCommon):
+    @classmethod
+    @AccountTestInvoicingCommon.setup_country("ro")
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.log_checks = False
+        cls.env.user.group_ids += cls.env.ref("sales_team.group_sale_salesman")
+        cls.stock_journal = cls.env["account.journal"].create(
+            {
+                "name": "Stock Journal",
+                "code": "StockJurnal",
+                "type": "general",
+                "company_id": cls.env.company.id,
+            }
+        )
+        cls.env.company.account_stock_journal_id = cls.stock_journal
+        cls.landed_cost = cls.env["product.product"].create(
+            {
+                "name": "Landed Cost",
+                "type": "service",
+                "is_storable": False,
+                "purchase_method": "purchase",
+                "invoice_policy": "order",
+            }
+        )
+        cls.advance_product = cls.env["product.product"].create(
+            {
+                "name": "Advance Product",
+                "type": "service",
+                "is_storable": False,
+                "purchase_method": "purchase",
+                "invoice_policy": "order",
+            }
+        )
+        cls.supplier_1 = cls.env["res.partner"].create({"name": "Supplier 1"})
+        cls.customer_1 = cls.env["res.partner"].create({"name": "Customer 1"})
+        cls.ron = cls.env["res.currency"].search([("name", "=", "RON")])
+        cls.eur = cls.env["res.currency"].search([("name", "=", "EUR")])
+        cls.usd = cls.env["res.currency"].search([("name", "=", "USD")])
 
-class RomaniaTestData(models.Model):
-    _name = "nexterp.demodata"
-    _inherit = "nexterp.demodata.mixin"
-    _description = "Create demo data for sale and purchase"
-
-    @api.model
-    def install_demo_data(self, company=False):
-        self = self.with_company(company or self.env.company)
-        user_group_id = self.env['ir.model.data']._xmlid_to_res_id('base.group_user')
-        internal_users = self.env["res.users"].search([]).filtered_domain([('group_ids', 'in', [user_group_id])])
-        if not internal_users:
-            internal_users = self.env["res.users"].search([("share", "=", False)])
-        acc_group = self.env.ref("account.group_account_user")
-        acc_aut_group = self.env.ref("stock_account.group_stock_accounting_automatic")
-        for user in internal_users:
-            if acc_group and not user.has_group("account.group_account_user"):
-                user.write({"groups_id": [(4, acc_group.id)]})
-            if acc_aut_group and not user.has_group("stock_account.group_stock_accounting_automatic"):
-                user.write({"groups_id": [(4, acc_aut_group.id)]})
-
-    @api.model
-    def configure_product_categories(self, company):
-        categs = [
-            ("l10n_ro_demo_data.category_servicii", "service"),
-            ("l10n_ro_demo_data.category_materii_prime", "materii_prime"), 
-            ("l10n_ro_demo_data.category_produse_finite", "produse_finite"), 
-            ("l10n_ro_demo_data.category_marfuri", "marfuri"),
-            ("l10n_ro_demo_data.category_marfuri_avg", "marfuri"),
-            ("l10n_ro_demo_data.category_ambalaje", "ambalaje"),
-            ("l10n_ro_demo_data.category_combustibil", "combustibil"),
-            ("l10n_ro_demo_data.category_consumabile", "consumabile"),
-        ]
-        for categ in categs:
-            self.update_test_record_product_category(
-                self.env.ref(categ[0]).with_company(company), categ[1])
-
-    @api.model
-    def configure_product_taxes(self, company):
-        product_taxes = [
-            ('l10n_ro_demo_data.nexterp_demo_product_1', 'VAT collected 21% Goods', 'VAT deductible 21% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_2', 'VAT collected 11% Goods', 'VAT deductible 11% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_4', 'VAT collected 0% Goods', 'VAT deductible 0% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_5', 'VAT collected 21% Goods', 'VAT deductible 21% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_6', 'VAT collected 11% Goods', 'VAT deductible 11% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_8', 'VAT collected 0% Goods', 'VAT deductible 0% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_9', 'VAT collected 21% Goods', 'VAT deductible 21% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_10', 'VAT collected 11% Goods', 'VAT deductible 11% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_12', 'VAT collected 0% Goods', 'VAT deductible 0% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_13', 'VAT collected 21% Goods', 'VAT deductible 21% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_14', 'VAT collected 21% Goods', 'VAT deductible 21% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_15', 'VAT collected 21% Goods', 'VAT deductible 21% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_16', 'VAT collected 21% Goods', 'VAT deductible 21% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_17', 'VAT collected 21% Services', 'VAT deductible 21% Services'),
-            ('l10n_ro_demo_data.nexterp_demo_product_18', 'VAT collected 21% Services', 'VAT deductible 21% Services'),
-            ('l10n_ro_demo_data.nexterp_demo_product_19', 'VAT collected 21% Services', 'VAT deductible 21% Services'),
-            ('l10n_ro_demo_data.nexterp_demo_product_20', 'VAT collected 11% Services', 'VAT deductible 11% Services'),
-            ('l10n_ro_demo_data.nexterp_demo_product_22', 'VAT collected 21% Goods', 'VAT deductible 21% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_23', 'VAT collected 21% Goods', 'VAT deductible 21% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_24', 'VAT collected 21% Goods', 'VAT deductible 21% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_25', 'VAT collected 21% Goods', 'VAT deductible 21% Goods'),
-            ('l10n_ro_demo_data.nexterp_demo_product_26', 'VAT collected 21% Goods', 'VAT deductible 21% Goods'),
-        ]
-        for pr_tax in product_taxes:
-            product = self.env.ref(pr_tax[0], raise_if_not_found=False)
-            if product:
-                product = product.with_company(company)
-                sale_tax = self.env["account.tax"].search(
-                    [("description", "=", pr_tax[1]), ("company_id", "=", company.id)]
-                )
-                purchase_tax = self.env["account.tax"].search(
-                    [("description", "=", pr_tax[2]), ("company_id", "=", company.id)]
-                )
-                if sale_tax:
-                    product.taxes_id = sale_tax
-                if purchase_tax:
-                    product.supplier_taxes_id = purchase_tax
+        cls.account_income = cls.env.company.income_account_id
+        cls.account_expense = cls.env.company.expense_account_id
+        cls.account_valuation = cls.env.company.account_stock_valuation_id
 
     @api.model
     def create_demo_data_orders(self, company=False):

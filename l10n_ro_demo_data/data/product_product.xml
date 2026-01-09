@@ -1,355 +1,279 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
     <record id="nexterp_demo_product_1"  model="product.product">
-        <field name="name">Marfa Fifo 19% tva</field>
+        <field name="name">Marfa Fifo 21% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_1</field>
         <field name="barcode">demo_product_1</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
-        </record> 
+    </record>
     <record id="nexterp_demo_product_2"  model="product.product">
-        <field name="name">Marfa Fifo 9% tva</field>
+        <field name="name">Marfa Fifo 11% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_2</field>
         <field name="barcode">demo_product_2</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 9% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 9% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 11% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 11% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
-        </record> 
-    <record id="nexterp_demo_product_3"  model="product.product">
-        <field name="name">Marfa Fifo 5% tva</field>
-        <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
-        <field name="type">consu</field>
-        <field name="is_storable">True</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="default_code">demo_product_3</field>
-        <field name="barcode">demo_product_3</field>
-        <field name="list_price">100</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 5% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 5% Goods')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 1.5})]"/>
-        </record> 
+    </record>
     <record id="nexterp_demo_product_4"  model="product.product">
         <field name="name">Marfa Fifo 0% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_4</field>
         <field name="barcode">demo_product_4</field>
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('description', '=', 'VAT collected 0% Goods')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 0% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 0.75})]"/>
-        </record> 
+    </record>
     <record id="nexterp_demo_product_5"  model="product.product">
-        <field name="name">Marfa Average 19% tva</field>
+        <field name="name">Marfa Average 21% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri Average')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_5</field>
         <field name="barcode">demo_product_5</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_3'), 'price': 3.75})]"/>
-        </record> 
+    </record>
     <record id="nexterp_demo_product_6"  model="product.product">
-        <field name="name">Marfa Average 9% tva</field>
+        <field name="name">Marfa Average 11% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri Average')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_6</field>
         <field name="barcode">demo_product_6</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 9% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 9% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 11% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 11% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_3'), 'price': 3.75})]"/>
-        </record> 
-    <record id="nexterp_demo_product_7"  model="product.product">
-        <field name="name">Marfa Average 5% tva</field>
-        <field name="categ_id" search="[('name', '=', 'Marfuri Average')]" model="product.category"/>
-        <field name="type">consu</field>
-        <field name="is_storable">True</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="default_code">demo_product_7</field>
-        <field name="barcode">demo_product_7</field>
-        <field name="list_price">100</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 5% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 5% Goods')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_3'), 'price': 1.5})]"/>
-        </record> 
+    </record>
     <record id="nexterp_demo_product_8"  model="product.product">
         <field name="name">Marfa Average 0% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri Average')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_8</field>
         <field name="barcode">demo_product_8</field>
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('description', '=', 'VAT collected 0% Goods')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 0% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_3'), 'price': 0.75})]"/>
-        </record> 
+    </record>
     <record id="nexterp_demo_product_9"  model="product.product">
-        <field name="name">Marfa Lot 19% tva</field>
+        <field name="name">Marfa Lot 21% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_9</field>
         <field name="barcode">demo_product_9</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_5'), 'price': 3.75})]"/>
-        </record> 
+    </record>
     <record id="nexterp_demo_product_10"  model="product.product">
-        <field name="name">Marfa Lot 9% tva</field>
+        <field name="name">Marfa Lot 11% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_10</field>
         <field name="barcode">demo_product_10</field>
         <field name="list_price">100</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 9% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 9% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 11% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 11% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_5'), 'price': 3.75})]"/>
-        </record> 
-    <record id="nexterp_demo_product_11"  model="product.product">
-        <field name="name">Marfa Lot 5% tva</field>
-        <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
-        <field name="type">consu</field>
-        <field name="is_storable">True</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="default_code">demo_product_11</field>
-        <field name="barcode">demo_product_11</field>
-        <field name="list_price">100</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 5% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 5% Goods')]" model="account.tax"/>
-        <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_5'), 'price': 1.5})]"/>
-        </record> 
+    </record>
     <record id="nexterp_demo_product_12"  model="product.product">
         <field name="name">Marfa Lot 0% tva</field>
         <field name="categ_id" search="[('name', '=', 'Marfuri')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_12</field>
         <field name="barcode">demo_product_12</field>
         <field name="list_price">100</field>
         <field name="taxes_id" search="[('description', '=', 'VAT collected 0% Goods')]" model="account.tax"/>
         <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 0% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_5'), 'price': 0.75})]"/>
-        </record> 
+    </record>
     <record id="nexterp_demo_product_13"  model="product.product">
         <field name="name">Europaleti</field>
         <field name="categ_id" search="[('name', '=', 'Ambalaje')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_13</field>
         <field name="barcode">demo_product_13</field>
         <field name="list_price">50</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_7'), 'price': 1.5})]"/>
-        </record> 
+    </record>
     <record id="nexterp_demo_product_14"  model="product.product">
         <field name="name">Motorina</field>
         <field name="categ_id" search="[('name', '=', 'Combustibil')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_litre"/>
-        <field name="uom_po_id" ref="uom.product_uom_litre"/>
         <field name="default_code">demo_product_14</field>
         <field name="barcode">demo_product_14</field>
         <field name="list_price">10</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_7'), 'price': 4.5})]"/>
-        </record> 
+    </record> 
     <record id="nexterp_demo_product_15"  model="product.product">
         <field name="name">Benzina</field>
         <field name="categ_id" search="[('name', '=', 'Combustibil')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_litre"/>
-        <field name="uom_po_id" ref="uom.product_uom_litre"/>
         <field name="default_code">demo_product_15</field>
         <field name="barcode">demo_product_15</field>
         <field name="list_price">10</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_7'), 'price': 4.5})]"/>
-        </record> 
+    </record> 
     <record id="nexterp_demo_product_16"  model="product.product">
         <field name="name">Lemn de Foc</field>
         <field name="categ_id" search="[('name', '=', 'Combustibil')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_cubic_meter"/>
-        <field name="uom_po_id" ref="uom.product_uom_cubic_meter"/>
         <field name="default_code">demo_product_16</field>
         <field name="barcode">demo_product_16</field>
         <field name="list_price">500</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_7'), 'price': 322.5})]"/>
-        </record> 
+    </record> 
     <record id="nexterp_demo_product_17"  model="product.product">
         <field name="name">Servicii Transport</field>
         <field name="categ_id" search="[('name', '=', 'Servicii')]" model="product.category"/>
         <field name="type">service</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_17</field>
         <field name="barcode">demo_product_17</field>
         <field name="list_price">0</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Services')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Services')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Services')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Services')]" model="account.tax"/>
     </record> 
     <record id="nexterp_demo_product_18"  model="product.product">
         <field name="name">Servicii publicitate</field>
         <field name="categ_id" search="[('name', '=', 'Servicii')]" model="product.category"/>
         <field name="type">service</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_18</field>
         <field name="barcode">demo_product_18</field>
         <field name="list_price">0</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Services')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Services')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Services')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Services')]" model="account.tax"/>
     </record> 
     <record id="nexterp_demo_product_19"  model="product.product">
-        <field name="name">Avans Clienti-Furnizori 19% tva</field>
+        <field name="name">Avans Clienti-Furnizori 21% tva</field>
         <field name="categ_id" search="[('name', '=', 'Servicii')]" model="product.category"/>
         <field name="type">service</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_19</field>
         <field name="barcode">demo_product_19</field>
         <field name="list_price">0</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Services')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Services')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Services')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Services')]" model="account.tax"/>
     </record> 
     <record id="nexterp_demo_product_20"  model="product.product">
-        <field name="name">Avans Clienti-Furnizori 9% tva</field>
+        <field name="name">Avans Clienti-Furnizori 11% tva</field>
         <field name="categ_id" search="[('name', '=', 'Servicii')]" model="product.category"/>
         <field name="type">service</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_20</field>
         <field name="barcode">demo_product_20</field>
         <field name="list_price">0</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 9% Services')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 9% Services')]" model="account.tax"/>
-    </record> 
-    <record id="nexterp_demo_product_21"  model="product.product">
-        <field name="name">Avans Clienti-Furnizori 5% tva</field>
-        <field name="categ_id" search="[('name', '=', 'Servicii')]" model="product.category"/>
-        <field name="type">service</field>
-        <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
-        <field name="default_code">demo_product_21</field>
-        <field name="barcode">demo_product_21</field>
-        <field name="list_price">0</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 5% Services')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 5% Services')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 11% Services')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 11% Services')]" model="account.tax"/>
     </record> 
     <record id="nexterp_demo_product_22"  model="product.product">
         <field name="name">Filtru cafea</field>
         <field name="categ_id" search="[('name', '=', 'Consumabile')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_22</field>
         <field name="barcode">demo_product_22</field>
         <field name="list_price">1</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
-        </record> 
+    </record> 
     <record id="nexterp_demo_product_23"  model="product.product">
         <field name="name">Cafea Vrac</field>
         <field name="categ_id" search="[('name', '=', 'Materii Prime')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_kgm"/>
-        <field name="uom_po_id" ref="uom.product_uom_kgm"/>
         <field name="default_code">demo_product_23</field>
         <field name="barcode">demo_product_23</field>
         <field name="list_price">50</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 37.5})]"/>
-        </record> 
+    </record> 
     <record id="nexterp_demo_product_24"  model="product.product">
         <field name="name">Apa Plata</field>
         <field name="categ_id" search="[('name', '=', 'Materii Prime')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_24</field>
         <field name="barcode">demo_product_24</field>
         <field name="list_price">5</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
-        </record> 
+    </record> 
     <record id="nexterp_demo_product_25"  model="product.product">
         <field name="name">Zahar</field>
         <field name="categ_id" search="[('name', '=', 'Materii Prime')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_kgm"/>
-        <field name="uom_po_id" ref="uom.product_uom_kgm"/>
         <field name="default_code">demo_product_25</field>
         <field name="barcode">demo_product_25</field>
         <field name="list_price">5</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Goods')]" model="account.tax"/>
         <field name="seller_ids" eval="[(0, 0, {'partner_id': ref('l10n_ro_demo_data.nexterp_demo_partner_2'), 'price': 3.75})]"/>
-        </record> 
+    </record> 
     <record id="nexterp_demo_product_26"  model="product.product">
         <field name="name">Cafea Espresso</field>
         <field name="categ_id" search="[('name', '=', 'Produse Finite')]" model="product.category"/>
         <field name="type">consu</field>
         <field name="is_storable">True</field>
         <field name="uom_id" ref="uom.product_uom_unit"/>
-        <field name="uom_po_id" ref="uom.product_uom_unit"/>
         <field name="default_code">demo_product_26</field>
         <field name="barcode">demo_product_26</field>
         <field name="list_price">0</field>
-        <field name="taxes_id" search="[('description', '=', 'VAT collected 19% Goods')]" model="account.tax"/>
-        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 19% Goods')]" model="account.tax"/>
+        <field name="taxes_id" search="[('description', '=', 'VAT collected 21% Goods')]" model="account.tax"/>
+        <field name="supplier_taxes_id" search="[('description', '=', 'VAT deductible 21% Goods')]" model="account.tax"/>
     </record> 
 </odoo>

@@ -130,7 +130,7 @@ class RomaniaTestDataMixin(models.Model):
             "state_id": state,
             "country_id": country,
             "phone": fake_data.phone_number(),
-            "l10n_ro_l10n_ro_vat_subjected": l10n_ro_vat_subjected,
+            "l10n_ro_vat_subjected": l10n_ro_vat_subjected,
             "customer_rank": int(fake_data.boolean()),
             "supplier_rank": int(fake_data.boolean()),
         }
@@ -252,10 +252,10 @@ class RomaniaTestDataMixin(models.Model):
             "property_cost_method": "fifo" if prod_type != "service" else "standard",
             "property_valuation": "real_time"
             if prod_type != "service"
-            else "manual_periodic",
+            else "real_time",
             "property_stock_valuation_account_id": stock_acc.id,
-            "property_stock_account_input_categ_id": stock_acc.id,
-            "property_stock_account_output_categ_id": stock_acc.id,
+            # "property_stock_account_input_categ_id": stock_acc.id,
+            # "property_stock_account_output_categ_id": stock_acc.id,
             "property_account_income_categ_id": income_acc.id,
             "property_account_expense_categ_id": expense_acc.id,
         }
@@ -277,7 +277,7 @@ class RomaniaTestDataMixin(models.Model):
             "property_cost_method": "fifo" if prod_type != "service" else "standard",
             "property_valuation": "real_time"
             if prod_type != "service"
-            else "manual_periodic",
+            else "real_time",
         }
         line_categ = False
         for line in categ_mapping:
@@ -290,8 +290,8 @@ class RomaniaTestDataMixin(models.Model):
             vals.update(
                 {
                     "property_stock_valuation_account_id": stock_acc.id,
-                    "property_stock_account_input_categ_id": stock_acc.id,
-                    "property_stock_account_output_categ_id": stock_acc.id,
+                    # "property_stock_account_input_categ_id": stock_acc.id,
+                    # "property_stock_account_output_categ_id": stock_acc.id,
                     "property_account_income_categ_id": income_acc.id,
                     "property_account_expense_categ_id": expense_acc.id,
                 }
@@ -314,13 +314,13 @@ class RomaniaTestDataMixin(models.Model):
             prod_type = "product"
         sale_serv_tax = self.env["account.tax"].search(
             [
-                ("name", "=", "TVA colectat 19% Servicii"),
+                ("description", "=", "TVA colectat 19% Servicii"),
                 ("company_id", "=", self.env.company.id),
             ]
         )
         purch_serv_tax = self.env["account.tax"].search(
             [
-                ("name", "=", "TVA deductibil 19% Servicii"),
+                ("description", "=", "TVA deductibil 19% Servicii"),
                 ("company_id", "=", self.env.company.id),
             ]
         )
@@ -330,6 +330,7 @@ class RomaniaTestDataMixin(models.Model):
         vals = {
             "name": name,
             "type": prod_type,
+            "is_storable": True if prod_type != "service" else False,
             "categ_id": product_category.id,
             "list_price": list_price,
         }

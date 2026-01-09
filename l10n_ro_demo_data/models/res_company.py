@@ -80,13 +80,13 @@ class ResCompany(models.Model):
             # Add services taxes to configuration
             sale_serv_tax = self.env["account.tax"].search(
                 [
-                    ("description", "=", "VAT collected 19% Services"),
+                    ("description", "=", "VAT collected 21% Services"),
                     ("company_id", "=", company.id),
                 ]
             )
             purch_serv_tax = self.env["account.tax"].search(
                 [
-                    ("description", "=", "VAT deductible 19% Services"),
+                    ("description", "=", "VAT deductible 21% Services"),
                     ("company_id", "=", company.id),
                 ]
             )
@@ -123,7 +123,7 @@ class ResCompany(models.Model):
                             ("company_id", "=", company.id),
                         ]
                     ),
-                    "l10n_ro_no_signature_text": inv_text,
+                    # "l10n_ro_no_signature_text": inv_text,
                 }
             )
             # account_cash_basis_base_account_id
@@ -132,8 +132,8 @@ class ResCompany(models.Model):
             config = self.env['res.config.settings'].with_company(company).create({
                 "default_invoice_policy": "delivery",
                 "group_multi_currency": True,
-                "group_show_sale_receipts": True,
-                "group_show_purchase_receipts": True,
+                "show_sale_receipts": True,
+                # "group_show_purchase_receipts": True,
                 "group_sale_delivery_address": True,
                 "group_uom": True,
                 "group_discount_per_so_line": True,
@@ -151,4 +151,6 @@ class ResCompany(models.Model):
             config.flush_recordset()
             config.execute()
 
-        del self.env.registry._auto_install_template
+        if hasattr(self.env.registry, '_auto_install_template'):
+            self.env.registry._auto_install_template(self.env)
+            del self.env.registry._auto_install_template
