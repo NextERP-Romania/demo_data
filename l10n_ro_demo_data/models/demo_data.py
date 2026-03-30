@@ -43,12 +43,9 @@ class RomaniaTestData(models.Model):
         if not internal_users:
             internal_users = self.env["res.users"].search([("share", "=", False)])
         acc_group = self.env.ref("account.group_account_user")
-        acc_aut_group = self.env.ref("stock_account.group_stock_accounting_automatic")
         for user in internal_users:
             if acc_group and not user.has_group("account.group_account_user"):
                 user.write({"groups_id": [(4, acc_group.id)]})
-            if acc_aut_group and not user.has_group("stock_account.group_stock_accounting_automatic"):
-                user.write({"groups_id": [(4, acc_aut_group.id)]})
 
     @api.model
     def configure_product_categories(self, company):
